@@ -1,0 +1,38 @@
+.popup {
+	background: rgba(37, 36, 36, 0.3);
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	transition: all 0.25s;
+	top: 0;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+	--opacity: 0;
+	opacity: var(--opacity);
+	padding: 1rem;
+}
+
+.popup fieldset {
+	display: flex;
+	flex-direction: column;
+	background: var(--grey);
+	padding: 2rem;
+	border: 3px solid var(--pink);
+	border-radius: 5px;
+	box-shadow: var(--box-shadow);
+	transition: all 0.2s;
+	--scale: 0.3;
+	transform: scale(var(--scale));
+}
+
+.popup.open {
+	--opacity: 1;
+	pointer-events: all;
+}
+
+.popup.open fieldset {
+    --scale: 1;
+    background-color: aliceblue;
+}
