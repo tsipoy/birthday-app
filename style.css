@@ -32,7 +32,13 @@
 	pointer-events: all;
 }
 
-.popup.open fieldset {
+.popup.open fieldset,
+.delete-confirm {
     --scale: 1;
     background-color: aliceblue;
+}
+
+.delete-confirm {
+	padding: 2rem;
+	border-radius: 5px;
 }
