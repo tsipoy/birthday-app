@@ -8,27 +8,38 @@ async function fetchBirthday() {
 
     const response = await fetch(endpoint);
     let data = await response.json();
-    
-    
+// loclal storage
+    localStorage.setItem("people", JSON.stringify(data));
+    var item = JSON.parse(localStorage.getItem("people"));
+    console.log(item);
+
     async function destroyPopup(openPopup) {
         openPopup.classList.remove('open');
-        // await wait(50);
         openPopup.remove();
         openPopup = null;
     }
-    
-        const populateBirthday = people => {
-            return people.map(person => {
+
+    const populateBirthday = people => {
+        return people.map(person => {
             const calculateAge = (age) => {
                 const msDate = Date.now() - age.getTime();
                 const ageDate = new Date(msDate);
                 return Math.abs(ageDate.getFullYear() - 1970);
-            } 
+            }
             const year = calculateAge(new Date(person.birthday));
-    
+
             const date = new Date(person.birthday);
             const month = date.toLocaleString('default', { month: 'long' });
             const birthDay = date.getDate();
+
+            const date_diff_indays = function(date1, date2) {
+                dt1 = new Date(date1);
+                dt2 = new Date(date2);
+                return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+            }
+                const totalDays = date_diff_indays(new Date(person.birthday));
+
+                
 
             return `
                 <tr data-id="${person.id}" class="table-row">
@@ -36,7 +47,7 @@ async function fetchBirthday() {
                     <td class="lastname" data-value="${person.lastName}">${person.lastName}</td>
                     <td class="firstname" data-value="${person.firstName}">${person.firstName}</td>
                     <td class="birthday">Turns ${year} on the ${birthDay}th of ${month}</td>
-                    <td class="leftDay">Days<br></td>
+                    <td class="leftDay">Days ${totalDays}<br></td>
                     <td class="edit-btn">
                         <button class="edit" value="${person.id}">Edit</button>
                     </td>
@@ -45,35 +56,37 @@ async function fetchBirthday() {
                     </td>
                 </tr>
         `;
-        }).join('')};
-        const generatedBirthday = () => {
-            const html = populateBirthday(data);
-            birthdayData.innerHTML = html;
-        }
-        generatedBirthday();
-        // displayList(data);
+        }).join('')
+    };
+    const generatedBirthday = () => {
+        const html = populateBirthday(data);
+        birthdayData.innerHTML = html;
+    }
+    generatedBirthday();
 
+
+    let peopleData = [];
     const addPeople = e => {
         e.preventDefault();
         console.log(e);
-        const el = e.currentTarget;
+        const el = e.target;
         const newPeople = {
             picture: el.picture.value,
             lastName: el.lastName.value,
             firstName: el.firstName.value,
             birthday: el.birthday.getDay(),
-            id: Date.now(), 
+            id: Date.now(),
         };
-        people.push(newPeople);
+        peopleData.push(newPeople);
         console.log(newPeople);
+        el.reset();
         birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
-        birthdayData.reset();
     }
 
     const addEditPopup = (e) => {
-        if(e.target.closest('.add-buttton')) {
+        if (e.target.closest('.add-buttton')) {
             console.log("It opens");
-            editAddPopup(e);   
+            editAddPopup(e);
         }
     }
 
@@ -84,8 +97,8 @@ async function fetchBirthday() {
         const addFormPopup = document.createElement('form');
         addFormPopup.classList.add('popup');
         addFormPopup.classList.add('open');
-        addFormPopup.insertAdjacentHTML('afterbegin', 
-        `
+        addFormPopup.insertAdjacentHTML('afterbegin',
+            `
         <fieldset> 
             <div class="form-grou">
                 <label for="addLastname" class="lastname-label">Lastname</label>
@@ -111,36 +124,34 @@ async function fetchBirthday() {
         `)
 
         // submit form 
-            addFormPopup.addEventListener('submit', e => { 
-                e.preventDefault();
-                    let submitAddForm = e.target;
-                    submitAddForm.lastName = addFormPopup.addLastname.value;
-                    submitAddForm.firstName = addFormPopup.addFirstname.value;
-                    submitAddForm.birthday = addFormPopup.addBirthday.value;
-                    submitAddForm.picture = addFormPopup.addAvatar.value;
-                    const newPeople = {
-                        picture: submitAddForm.picture,
-                        lastName: submitAddForm.lastName,
-                        firstName: submitAddForm.firstName,
-                        birthday: submitAddForm.birthday,
-                        id: Date.now(), 
-                    };
-                    data.push(newPeople);
-                    console.log(newPeople);
-                    generatedBirthday(addFormPopup);
-                    //resolve(e.currentTarget.editIdPopup)
-                    destroyPopup(addFormPopup);
-                
-            }, { once: true });
+        addFormPopup.addEventListener('submit', e => {
+            e.preventDefault();
+            let submitAddForm = e.target;
+            submitAddForm.lastName = addFormPopup.addLastname.value;
+            submitAddForm.firstName = addFormPopup.addFirstname.value;
+            submitAddForm.birthday = addFormPopup.addBirthday.value;
+            submitAddForm.picture = addFormPopup.addAvatar.value;
+            const newPeople = {
+                picture: submitAddForm.picture,
+                lastName: submitAddForm.lastName,
+                firstName: submitAddForm.firstName,
+                birthday: submitAddForm.birthday,
+                id: Date.now(),
+            };
+            data.push(newPeople);
+            console.log(newPeople);
+            generatedBirthday(addFormPopup);
+            destroyPopup(addFormPopup);
 
-            // open form
-                document.body.appendChild(addFormPopup);
-                addFormPopup.classList.add('open');
-                // await wait(50);
+        }, { once: true });
+
+        // open form
+        document.body.appendChild(addFormPopup);
+        addFormPopup.classList.add('open');
         // close form
-        if(addFormPopup.close) {
+        if (addFormPopup.close) {
             const closeAddBtn = addFormPopup.close;
-                closeAddBtn.addEventListener('click', (e) => {
+            closeAddBtn.addEventListener('click', (e) => {
                 destroyPopup(addFormPopup);
                 console.log('It is canceled');
             }, { once: true });
@@ -148,36 +159,36 @@ async function fetchBirthday() {
     };
 
     addButton.addEventListener("click", editAddPopup);
-    
+
     // editting popup
     const popupBirthday = (e) => {
-        if(e.target.closest('button.edit')) {
+        if (e.target.closest('button.edit')) {
             let editForm = e.target.closest('tr');
             const btn = editForm.querySelector('button.edit');
             let id = btn.value;
             editPopup(id);
         }
     }
-    
+
     const deletedPopup = (e) => {
-        if(e.target.closest('button.delete')) {
+        if (e.target.closest('button.delete')) {
             const deleteTr = e.target.closest('tr');
             const btn = deleteTr.querySelector('button.delete');
             let id = btn;
             deletedData(id);
         }
     }
-    
-     // open modal 
+
+    // open modal 
     const editPopup = editId => {
-        const editIdPopup = data.find(person => person.id === editId); 
-        return new Promise(async function(resolve) {
-    
+        const editIdPopup = data.find(person => person.id === editId);
+        return new Promise(async function (resolve) {
+
             const formPopup = document.createElement('form');
             formPopup.classList.add('popup');
             formPopup.classList.add('open');
-            formPopup.insertAdjacentHTML('afterbegin', 
-            `
+            formPopup.insertAdjacentHTML('afterbegin',
+                `
                 <fieldset> 
                         <div class="form-group">
                             <label for="lastname">Lastname</label>
@@ -207,29 +218,29 @@ async function fetchBirthday() {
                 </fiedset>
             `)
 
-    
+
             // submit form 
-                formPopup.addEventListener('submit', e => { 
-                    e.preventDefault();
-                        console.log(e.target);
-                        editIdPopup.lastName = formPopup.lastnameId.value;
-                        editIdPopup.firstName = formPopup.firstnameId.value;
-                        editIdPopup.birthday = formPopup.birthdayId.value;
-                        editIdPopup.picture = formPopup.urlId.value;
-                        generatedBirthday(editIdPopup);
-                        // resolve(e.target.displayList(editIdPopup));
-                        destroyPopup(formPopup);
-                    
-                }, { once: true });
-    
-                // open form
-                    document.body.appendChild(formPopup);
-                    formPopup.classList.add('open');
-                    // await wait(50);
+            formPopup.addEventListener('submit', e => {
+                e.preventDefault();
+                console.log(e.target);
+                editIdPopup.lastName = formPopup.lastnameId.value;
+                editIdPopup.firstName = formPopup.firstnameId.value;
+                editIdPopup.birthday = formPopup.birthdayId.value;
+                editIdPopup.picture = formPopup.urlId.value;
+                generatedBirthday(editIdPopup);
+                // resolve(e.target.displayList(editIdPopup));
+                destroyPopup(formPopup);
+
+            }, { once: true });
+
+            // open form
+            document.body.appendChild(formPopup);
+            formPopup.classList.add('open');
+            // await wait(50);
             // close form
-            if(formPopup.close) {
+            if (formPopup.close) {
                 const closeBtn = formPopup.close;
-                    closeBtn.addEventListener('click', (e) => {
+                closeBtn.addEventListener('click', (e) => {
                     destroyPopup(formPopup);
                     console.log('It is canceled');
                 }, { once: true });
@@ -239,30 +250,30 @@ async function fetchBirthday() {
     };
 
     const deletedData = deletedId => {
-        const deletePeople = data.find(person => person.id  !== deletedId);
+        const deletePeople = data.find(person => person.id !== deletedId);
         console.log(deletePeople);
-        return new Promise(async function(resolve) {
+        return new Promise(async function (resolve) {
             const openDiv = document.createElement('article');
             openDiv.classList.add('open');
             openDiv.insertAdjacentHTML('afterbegin',
-            `
-                <article class="delete-confirm">
-                    <p>Are you sure you want to delete ${deletePeople.firstName}!</p>
-                    <button class="delete-button" name="deleteBtn" type="button">Delete</button>
-                    <button class="cancel-button cancel" name="cancel" type="button">Cancel</button>
+                `
+                <article class="delete-confirm" data-id="${openDiv.id}">
+                    <p>Are you sure you want to delete it!</p>
+                    <button class="delete-button" name="deleteBtn" type="button" value="${openDiv.id}">Delete</button>
+                    <button class="cancel-button cancel" name="cancel" type="button" value="${openDiv.id}">Cancel</button>
                 </article>
             `
             );
             const confirmDelete = (e) => {
                 const cancelBtn = e.target.closest('button.cancel-button');
-                if(cancelBtn) {
+                if (cancelBtn) {
                     console.log("You cancel it");
                     destroyPopup(openDiv);
                 }
             }
 
             openDiv.addEventListener('click', (e) => {
-                if(e.target.closest('button.delete-button')) {
+                if (e.target.closest('button.delete-button')) {
                     console.log(data);
                     let deleteData = data;
                     const deletePersonBirthday = deleteData.find(person => person.id !== deletedId);
@@ -272,41 +283,23 @@ async function fetchBirthday() {
                     // generatedBirthday(deletePersonBirthday);
                     // const deletedText = btnDeleted.querySelector('tr');
                     // delete.remove();
-                    
+
                     resolve(deletePersonBirthday);
                     console.log("You delete it");
                     destroyPopup(openDiv);
                 }
             });
-    
+
             openDiv.addEventListener('click', confirmDelete);
             document.body.appendChild(openDiv);
             //await wait(20);
             openDiv.classList.add('popup');
         })
     }
-    
-    // Local storage
-    const initLocalStorage = () => {
-        const listOfPeope = JSON.parse(localStorage.getItem('people'));
-        if(!listOfPeope) {
-            people = [];
-        } else {
-            people = listOfPeope;
-        }
-        birthdayData.dispatchEvent(new CustomEvent('updatedBirthday')); 
-    }
-    
-    const updatedLocalStorage = () => {
-        localStorage.getItem('people', JSON.stringify('people'));
-    }
 
     birthdayData.addEventListener('submit', addPeople);
-    birthdayData.addEventListener('updatedBirthday', updatedLocalStorage);
     window.addEventListener('click', popupBirthday);
     window.addEventListener('click', deletedPopup);
-    
-    initLocalStorage();
 }
 
 fetchBirthday();
