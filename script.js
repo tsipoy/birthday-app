@@ -8,7 +8,8 @@ async function fetchBirthday() {
 
     const response = await fetch(endpoint);
     let data = await response.json();
-// loclal storage
+
+    // loclal storage
     localStorage.setItem("people", JSON.stringify(data));
     var item = JSON.parse(localStorage.getItem("people"));
     console.log(item);
@@ -21,6 +22,18 @@ async function fetchBirthday() {
 
     const populateBirthday = people => {
         return people.map(person => {
+            const daySuffix = function(df) {
+                if(df > 3 && df < 21 ) return "th";
+                switch(df % 10) {
+                    case 1: return "st";
+                    case 2: return "nd";
+                    case 3: return "rd";
+                    default: return "th";
+
+                }
+            }
+            console.log(daySuffix());
+
             const calculateAge = (age) => {
                 const msDate = Date.now() - age.getTime();
                 const ageDate = new Date(msDate);
@@ -37,22 +50,24 @@ async function fetchBirthday() {
                 dt2 = new Date(date2);
                 return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
             }
-                const totalDays = date_diff_indays(new Date(person.birthday));
-
-                
+            const totalDays = date_diff_indays(new Date(person.birthday));
 
             return `
                 <tr data-id="${person.id}" class="table-row">
                     <td class="picture"><img src="${person.picture}" alt="${person.firstName}"></td>
                     <td class="lastname" data-value="${person.lastName}">${person.lastName}</td>
                     <td class="firstname" data-value="${person.firstName}">${person.firstName}</td>
-                    <td class="birthday">Turns ${year} on the ${birthDay}th of ${month}</td>
+                    <td class="birthday">Turns ${year} on the ${birthDay} ${daySuffix(birthDay)} of ${month}</td>
                     <td class="leftDay">Days ${totalDays}<br></td>
                     <td class="edit-btn">
-                        <button class="edit" value="${person.id}">Edit</button>
+                        <button class="edit" value="${person.id}">
+                            <img class="edit" src="./images/edit_icon.png" alt="${person.firstName}"> 
+                        </button>
                     </td>
                     <td class="delete-btn">
-                        <button class="delete" value="${person.id}">Delete</button>
+                        <button class="delete" value="${person.id}">
+                            <img class="delete" src="./images/delete_icon.png" alt="${person.firstName}">  
+                        </button>
                     </td>
                 </tr>
         `;
@@ -97,20 +112,21 @@ async function fetchBirthday() {
         const addFormPopup = document.createElement('form');
         addFormPopup.classList.add('popup');
         addFormPopup.classList.add('open');
+
         addFormPopup.insertAdjacentHTML('afterbegin',
             `
         <fieldset> 
-            <div class="form-grou">
+            <div class="form-group">
                 <label for="addLastname" class="lastname-label">Lastname</label>
                 <input type="text" class="form-control" id="addLastname">
             </div>
             <div class="form-group">
                 <label for="addFirstname" class="firstname-label">Firstname</label>
-                <input type="text" class="form-control" id="addFirstname" aria-describedby="firstnameHelp">
+                <input type="text" class="form-control"  id="addFirstname" aria-describedby="firstnameHelp">
             </div>
             <div class="form-group">
                 <label for="addBirthday" class="birthday-label">Birthday</label>
-                <input type="text" class="form-control" id="addBirthday">
+                <input type="date" class="form-control" id="addBirthday">
             </div>
             <div class="form-group">
                 <label for="addAvatar" class="avatar">Picture(Url)</label>
@@ -129,18 +145,18 @@ async function fetchBirthday() {
             let submitAddForm = e.target;
             submitAddForm.lastName = addFormPopup.addLastname.value;
             submitAddForm.firstName = addFormPopup.addFirstname.value;
-            submitAddForm.birthday = addFormPopup.addBirthday.value;
+            //submitAddForm.birthday = addFormPopup.addBirthday.value;
             submitAddForm.picture = addFormPopup.addAvatar.value;
             const newPeople = {
                 picture: submitAddForm.picture,
                 lastName: submitAddForm.lastName,
                 firstName: submitAddForm.firstName,
-                birthday: submitAddForm.birthday,
+               // birthday: submitAddForm.birthday,
                 id: Date.now(),
             };
             data.push(newPeople);
             console.log(newPeople);
-            generatedBirthday(addFormPopup);
+            popupBirthday();
             destroyPopup(addFormPopup);
 
         }, { once: true });
@@ -183,10 +199,17 @@ async function fetchBirthday() {
     const editPopup = editId => {
         const editIdPopup = data.find(person => person.id === editId);
         return new Promise(async function (resolve) {
+            const calculateAge = (age) => {
+                const msDate = Date.now() - age.getTime();
+                const ageDate = new Date(msDate);
+                return Math.abs(ageDate.getFullYear() - 1970);
+            }
+            const year = calculateAge(new Date(editIdPopup.birthday));
 
             const formPopup = document.createElement('form');
             formPopup.classList.add('popup');
             formPopup.classList.add('open');
+
             formPopup.insertAdjacentHTML('afterbegin',
                 `
                 <fieldset> 
@@ -200,11 +223,7 @@ async function fetchBirthday() {
                         </div>
                         <div class="form-group">
                             <label for="birthday">Birthday</label>
-                            <input type="text" class="form-control" id="birthdayId" value="${editIdPopup.birthday}">
-                        </div>
-                        <div class="form-group">
-                            <label for="birthday">Days</label>
-                            <input type="text" class="form-control" id="dayId" value="${editIdPopup.birthday}">
+                            <input type="date" class="form-control" id="birthdayId" min="1970-01-01" max="2021-12-31" name="birthday-date">
                         </div>
                         <div class="form-group">
                             <label for="url">Your avatar image</label>
