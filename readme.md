@@ -1,42 +1,25 @@
-# Term 3 JS Project : Birthday App
+# Birthday App
 
-Hey team! So the final project here will be a birthday list.
+## Structure of the project
+- Fecth bootstrap through a link in the html.
+- Grab few elements from html.
+- Fetch the data from the `people.json`.
+- Store the data in the `local storage`.
+- Populate these data using html. Inside that population, I format the birthday date. After, I call that function in another new function.
+- Then, I generate the edit(open modal). So, I create editPopup function, editAddPopup fuction and add event listener for the input to be submitted.
+- When they are finished, I create the delete function with its confirm popup, the add event listener too.
+- Then, I put the some events listers at the end.
+- I wrap all the function inside a big `async`.
 
-We have a list of persons. The app will show us whose person is the closest to have their birthday.
+## If I had more time
+- I would still work with the delete button and the edit button when the users add a new birthday.
+- Also would like to work with the `sort` and the `filter input`.
 
-You have a file in the project called person.json. It contains a list of persons, and we want to add all those persons to our birthday list app.
+## I learnt many things from this project but also I still need more practice as well.
 
-The first time you launch the app, it should fetch all the data from the people.json local file. You can use fetch for that, it also works with local files.
-
-Once they are loaded in the app, you can save them on localstorage, and you don't need to work with the json file anymore.
-
-The app will show the list of people, sorted by the ones who will have their birthday the soonest.
-
-![assets/Screenshot_2020-09-12_at_16.57.18.png](assets/Screenshot_2020-09-12_at_16.57.18.png)
-
-The screenshot is just an example of a possible layout. Feel free to create a custom layout with boostrap if you want to.
-
-The users will be able to add a new element on the list (only on the app list localstorage, not on the json). Here are the fields :
-
--   first name
--   last name
--   birthday (datepicker)
--   an url for their avatar image
--   an id for handling the operations on the objects. (no need to add that on the form)
-
-The users should be able to edit an element on the list. When you click the edit button, a modal should appear with a form inside, to edit any attribute.
-
-The users should be able to delete an element. There will be a modal that will ask if you're sure to delete the element.
-
-Every action should be persisted into the local storage.
-
-Here is the package you should use for handling date computations. Add it as a dependency of your project
-
-[https://date-fns.org/v1.29.0/docs/differenceInYears](https://date-fns.org/v1.29.0/docs/differenceInYears)
-
-Again, try to make a plan, by dividing big tasks into smaller ones.
-You have the whole week to work on it. You can collaborate with other students, but copy/pasting code is forbidden.
-Once you're finished with the functionality, try to make your app more appealing with css and other tricks.
-Be creative 🎨
-
-Good Luck
+## Most of the parts in this project are challenging for me such as:
+- grabbing the data from the inputs
+- submitting the form.
+- the date between two days.
+- deleting the the data in the `tr`,
+- I would like to have more explanation about grabbing the inputs from the form and deleting the `tr.
