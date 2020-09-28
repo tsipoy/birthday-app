@@ -3,6 +3,8 @@ console.log("It works");
 const endpoint = "./people.json";
 const addButton = document.querySelector(".add-buttton")
 const birthdayData = document.querySelector("tbody");
+const div = document.querySelector('.wrapper');
+const input = document.querySelector('[name="filter"]');
 
 async function fetchBirthday() {
 
@@ -32,7 +34,6 @@ async function fetchBirthday() {
 
                 }
             }
-            console.log(daySuffix());
 
             const calculateAge = (age) => {
                 const msDate = Date.now() - age.getTime();
@@ -45,19 +46,19 @@ async function fetchBirthday() {
             const month = date.toLocaleString('default', { month: 'long' });
             const birthDay = date.getDate();
 
-            const date_diff_indays = function(date1, date2) {
+            const dateDiffInDays = function(date1, date2) {
                 dt1 = new Date(date1);
                 dt2 = new Date(date2);
                 return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
             }
-            const totalDays = date_diff_indays(new Date(person.birthday));
+            const totalDays = dateDiffInDays(new Date(person.birthDays));
 
             return `
                 <tr data-id="${person.id}" class="table-row">
                     <td class="picture"><img src="${person.picture}" alt="${person.firstName}"></td>
                     <td class="lastname" data-value="${person.lastName}">${person.lastName}</td>
                     <td class="firstname" data-value="${person.firstName}">${person.firstName}</td>
-                    <td class="birthday">Turns ${year} on the ${birthDay} ${daySuffix(birthDay)} of ${month}</td>
+                    <td class="birthday">Turns ${year} on the ${birthDay}<sup>${daySuffix(birthDay)}</sup> of ${month}</td>
                     <td class="leftDay">Days ${totalDays}<br></td>
                     <td class="edit-btn">
                         <button class="edit" value="${person.id}">
@@ -185,15 +186,7 @@ async function fetchBirthday() {
             editPopup(id);
         }
     }
-
-    const deletedPopup = (e) => {
-        if (e.target.closest('button.delete')) {
-            const deleteTr = e.target.closest('tr');
-            const btn = deleteTr.querySelector('button.delete');
-            let id = btn;
-            deletedData(id);
-        }
-    }
+     
 
     // open modal 
     const editPopup = editId => {
@@ -268,6 +261,17 @@ async function fetchBirthday() {
         )
     };
 
+    // Confirm delete
+    const deletedPopup = (e) => {
+        const deletedTr = e.target.closest('button.delete') 
+        if (deletedTr) {
+            const tr = e.target.closest('tr');
+            const deletedFromId = tr.dataset.id;
+            deletedData(deletedFromId);
+            
+        }
+    }
+
     const deletedData = deletedId => {
         const deletePeople = data.find(person => person.id !== deletedId);
         console.log(deletePeople);
@@ -291,22 +295,16 @@ async function fetchBirthday() {
                 }
             }
 
-            openDiv.addEventListener('click', (e) => {
-                if (e.target.closest('button.delete-button')) {
-                    console.log(data);
-                    let deleteData = data;
-                    const deletePersonBirthday = deleteData.find(person => person.id !== deletedId);
-                    deleteData = deletePersonBirthday;
-                    console.log(deleteData);
-                    console.log(deletePersonBirthday);
-                    // generatedBirthday(deletePersonBirthday);
-                    // const deletedText = btnDeleted.querySelector('tr');
-                    // delete.remove();
-
-                    resolve(deletePersonBirthday);
+            openDiv.addEventListener('click', () => {
+                const deletePersonBirthday = data.filter(person => person.id !== deletedId); 
+                const deleteConfirm = document.querySelector("button.delete-button");
+                if(deleteConfirm) {
+                    people = deletePersonBirthday;
+                    generatedBirthday(people);
+                    destroyPopup(openDiv); 
                     console.log("You delete it");
-                    destroyPopup(openDiv);
-                }
+                    birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
+                } 
             });
 
             openDiv.addEventListener('click', confirmDelete);
@@ -316,6 +314,16 @@ async function fetchBirthday() {
         })
     }
 
+    // // Filter input
+    // const searchInput = (e) => {
+    //     let filterInput = input.value;
+    //     console.log(filterInput);
+    //     let filterBirthday = data.filter( person => person.firstName.toLowerCase().includes(filterInput.toLowerCase()));
+    //     const filterFromHtml = generatedBirthday(filterBirthday);
+    //     div.innerHTML = filterFromHtml;
+    // }
+
+    // input.addEventListener('input', searchInput);
     birthdayData.addEventListener('submit', addPeople);
     window.addEventListener('click', popupBirthday);
     window.addEventListener('click', deletedPopup);
