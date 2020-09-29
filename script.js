@@ -14,7 +14,6 @@ async function fetchBirthday() {
     // loclal storage
     localStorage.setItem("people", JSON.stringify(data));
     var item = JSON.parse(localStorage.getItem("people"));
-    console.log(item);
 
     async function destroyPopup(openPopup) {
         openPopup.classList.remove('open');
@@ -307,16 +306,16 @@ async function fetchBirthday() {
         })
     }
 
-    // // Filter input
-    // const searchInput = (e) => {
-    //     let filterInput = input.value;
-    //     console.log(filterInput);
-    //     let filterBirthday = data.filter( person => person.firstName.toLowerCase().includes(filterInput.toLowerCase()));
-    //     const filterFromHtml = generatedBirthday(filterBirthday);
-    //     div.innerHTML = filterFromHtml;
-    // }
+    // Filter input
+    const searchInput = (e) => {
+        const filterInput = input.value;
+        console.log(filterInput);
+        const filterBirthday = data.filter(data => data.lastName.toLowerCase().includes(filterInput.toLowerCase()));
+        const filterFromHtml = populateBirthday(filterBirthday);
+        birthdayData.innerHTML = filterFromHtml;
+    }
 
-    // input.addEventListener('input', searchInput);
+    input.addEventListener('input', searchInput);
     birthdayData.addEventListener('submit', addPeople);
     window.addEventListener('click', popupBirthday);
     window.addEventListener('click', deletedPopup);
