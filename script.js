@@ -100,7 +100,7 @@ async function fetchBirthday() {
     }
 
     const addEditPopup = (e) => {
-        if (e.target.closest('.add-buttton')) {
+        if (e.target.closest('button.add-buttton')) {
             console.log("It opens");
             editAddPopup(e);
         }
@@ -134,7 +134,7 @@ async function fetchBirthday() {
                 <input type="url" class="form-control" id="addAvatar">
             </div>
             <div class="d-flex flex-row">
-                <button type="submit" class="submitbtn" name="submit">Submit</button>
+                <button type="submit" class="submit-btn">Save</button>
                 <button class="close-btn" name="close" type="button">Close</button>
             </div>
         </fiedset>
@@ -143,7 +143,7 @@ async function fetchBirthday() {
         // submit form 
         addFormPopup.addEventListener('submit', e => {
             e.preventDefault();
-            let submitAddForm = e.target;
+            const submitAddForm = e.target;
             submitAddForm.lastName = addFormPopup.addLastname.value;
             submitAddForm.firstName = addFormPopup.addFirstname.value;
             //submitAddForm.birthday = addFormPopup.addBirthday.value;
@@ -157,7 +157,7 @@ async function fetchBirthday() {
             };
             data.push(newPeople);
             console.log(newPeople);
-            popupBirthday();
+            generatedBirthday(addFormPopup);
             destroyPopup(addFormPopup);
 
         }, { once: true });
@@ -178,12 +178,13 @@ async function fetchBirthday() {
     addButton.addEventListener("click", editAddPopup);
 
     // editting popup
-    const popupBirthday = (e) => {
+
+    const popupBirthday = e => {
         if (e.target.closest('button.edit')) {
-            let editForm = e.target.closest('tr');
-            const btn = editForm.querySelector('button.edit');
-            let id = btn.value;
-            editPopup(id);
+            const tableRow = e.target.closest('tr');
+            console.log(tableRow);
+            const editForm = tableRow.dataset.id;
+            editPopup(editForm);
         }
     }
      
@@ -192,13 +193,6 @@ async function fetchBirthday() {
     const editPopup = editId => {
         const editIdPopup = data.find(person => person.id === editId);
         return new Promise(async function (resolve) {
-            const calculateAge = (age) => {
-                const msDate = Date.now() - age.getTime();
-                const ageDate = new Date(msDate);
-                return Math.abs(ageDate.getFullYear() - 1970);
-            }
-            const year = calculateAge(new Date(editIdPopup.birthday));
-
             const formPopup = document.createElement('form');
             formPopup.classList.add('popup');
             formPopup.classList.add('open');
@@ -274,7 +268,6 @@ async function fetchBirthday() {
 
     const deletedData = deletedId => {
         const deletePeople = data.find(person => person.id !== deletedId);
-        console.log(deletePeople);
         return new Promise(async function (resolve) {
             const openDiv = document.createElement('article');
             openDiv.classList.add('open');
@@ -299,8 +292,8 @@ async function fetchBirthday() {
                 const deletePersonBirthday = data.filter(person => person.id !== deletedId); 
                 const deleteConfirm = document.querySelector("button.delete-button");
                 if(deleteConfirm) {
-                    people = deletePersonBirthday;
-                    generatedBirthday(people);
+                    data = deletePersonBirthday;
+                    generatedBirthday(data);
                     destroyPopup(openDiv); 
                     console.log("You delete it");
                     birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
