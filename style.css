@@ -1,4 +1,18 @@
 
+/* .wrapper {
+	background-color: #55423d;
+}
+
+h1,
+thead {
+	color: #fffffe;
+}
+
+td,
+.select {
+	color: #fff3ec;
+} */
+
 .add-buttton {
 	margin: 24px;
 }
@@ -59,3 +73,7 @@ td button.edit,
     max-width: 50px;
 }
 
+.select {
+	padding-inline-start: 3rem;
+	padding-inline-end: 1rem;
+}

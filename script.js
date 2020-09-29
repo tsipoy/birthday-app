@@ -23,14 +23,13 @@ async function fetchBirthday() {
 
     const populateBirthday = people => {
         return people.map(person => {
-            const daySuffix = function(df) {
-                if(df > 3 && df < 21 ) return "th";
-                switch(df % 10) {
+            const daySuffix = function (df) {
+                if (df > 3 && df < 21) return "th";
+                switch (df % 10) {
                     case 1: return "st";
                     case 2: return "nd";
                     case 3: return "rd";
                     default: return "th";
-
                 }
             }
 
@@ -45,12 +44,37 @@ async function fetchBirthday() {
             const month = date.toLocaleString('default', { month: 'long' });
             const birthDay = date.getDate();
 
-            const dateDiffInDays = function(date1, date2) {
-                dt1 = new Date(date1);
-                dt2 = new Date(date2);
-                return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+            // const dateDiffInDays = function(date1, date2) {
+            //     dt1 = new Date(date1);
+            //     dt2 = new Date(date2);
+            //     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
+            // }
+            // const totalDays = dateDiffInDays(new Date(person.birthDays));
+
+            // const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+            // const firstDate = new Date(date.getDate());
+            // const secondDate = new Date();
+
+            // const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+
+            // const firstDate = new Date(person.birthday);
+            // const secondDate = new Date();
+
+            // const difference = firstDate.getTime() - secondDate.getTime();
+
+            // var diffDays = Math.ceil(difference / (1000 * 3600 * 24));
+
+            function diff_days(dt2, dt1) {
+
+                let diff = (dt2.getTime() - dt1.getTime()) / 1000;
+                diff /= (60 * 60 * 24);
+                return Math.abs(Math.round(diff));
+
             }
-            const totalDays = dateDiffInDays(new Date(person.birthDays));
+
+            dt1 = new Date();
+            dt2 = new Date(person.birthday);
+            let diffDays = (diff_days(dt1, dt2));
 
             return `
                 <tr data-id="${person.id}" class="table-row">
@@ -58,7 +82,7 @@ async function fetchBirthday() {
                     <td class="lastname" data-value="${person.lastName}">${person.lastName}</td>
                     <td class="firstname" data-value="${person.firstName}">${person.firstName}</td>
                     <td class="birthday">Turns ${year} on the ${birthDay}<sup>${daySuffix(birthDay)}</sup> of ${month}</td>
-                    <td class="leftDay">Days ${totalDays}<br></td>
+                    <td class="leftDay">Days ${diffDays}<br></td>
                     <td class="edit-btn">
                         <button class="edit" value="${person.id}">
                             <img class="edit" src="./images/edit_icon.png" alt="${person.firstName}"> 
@@ -151,7 +175,7 @@ async function fetchBirthday() {
                 picture: submitAddForm.picture,
                 lastName: submitAddForm.lastName,
                 firstName: submitAddForm.firstName,
-               // birthday: submitAddForm.birthday,
+                // birthday: submitAddForm.birthday,
                 id: Date.now(),
             };
             data.push(newPeople);
@@ -186,7 +210,7 @@ async function fetchBirthday() {
             editPopup(editForm);
         }
     }
-     
+
 
     // open modal 
     const editPopup = editId => {
@@ -256,12 +280,12 @@ async function fetchBirthday() {
 
     // Confirm delete
     const deletedPopup = (e) => {
-        const deletedTr = e.target.closest('button.delete') 
+        const deletedTr = e.target.closest('button.delete')
         if (deletedTr) {
             const tr = e.target.closest('tr');
             const deletedFromId = tr.dataset.id;
             deletedData(deletedFromId);
-            
+
         }
     }
 
@@ -288,15 +312,15 @@ async function fetchBirthday() {
             }
 
             openDiv.addEventListener('click', () => {
-                const deletePersonBirthday = data.filter(person => person.id !== deletedId); 
+                const deletePersonBirthday = data.filter(person => person.id !== deletedId);
                 const deleteConfirm = document.querySelector("button.delete-button");
-                if(deleteConfirm) {
+                if (deleteConfirm) {
                     data = deletePersonBirthday;
                     generatedBirthday(data);
-                    destroyPopup(openDiv); 
+                    destroyPopup(openDiv);
                     console.log("You delete it");
                     birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
-                } 
+                }
             });
 
             openDiv.addEventListener('click', confirmDelete);
@@ -314,6 +338,14 @@ async function fetchBirthday() {
         const filterFromHtml = populateBirthday(filterBirthday);
         birthdayData.innerHTML = filterFromHtml;
     }
+
+    // filter select
+    // const select = document.querySelector('.select');
+    // const selectForMonth = (e) => {
+
+    // }
+
+    // select.addEventListener('click', selectForMonth).
 
     input.addEventListener('input', searchInput);
     birthdayData.addEventListener('submit', addPeople);
