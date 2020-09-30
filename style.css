@@ -1,6 +1,22 @@
+.header {
+	padding-block-end: 3rem;
+}
+h1, 
+.header {
+	text-align: center;
+}
 
-/* .wrapper {
+.table {
 	background-color: #55423d;
+}
+
+thead, 
+.header {
+	background-color: #9656a1;
+}
+
+th {
+	font-size: 24px;
 }
 
 h1,
@@ -11,7 +27,7 @@ thead {
 td,
 .select {
 	color: #fff3ec;
-} */
+}
 
 .add-buttton {
 	margin: 24px;

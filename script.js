@@ -36,7 +36,7 @@ async function fetchBirthday() {
             const calculateAge = (age) => {
                 const msDate = Date.now() - age.getTime();
                 const ageDate = new Date(msDate);
-                return Math.abs(ageDate.getFullYear() - 1970);
+                return Math.abs(ageDate.getFullYear() - 1970) + 1;
             }
             const year = calculateAge(new Date(person.birthday));
 
@@ -141,11 +141,11 @@ async function fetchBirthday() {
             `
         <fieldset> 
             <div class="form-group">
-                <label for="addLastname" class="lastname-label">Lastname</label>
+                <label for="addLastname" class="lastname-label" value="${addFormPopup.firstName}">Lastname</label>
                 <input type="text" class="form-control" id="addLastname">
             </div>
             <div class="form-group">
-                <label for="addFirstname" class="firstname-label">Firstname</label>
+                <label for="addFirstname" class="firstname-label" value="${addFormPopup.lastName}">Firstname</label>
                 <input type="text" class="form-control"  id="addFirstname" aria-describedby="firstnameHelp">
             </div>
             <div class="form-group">
@@ -153,7 +153,7 @@ async function fetchBirthday() {
                 <input type="date" class="form-control" id="addBirthday">
             </div>
             <div class="form-group">
-                <label for="addAvatar" class="avatar">Picture(Url)</label>
+                <label for="addAvatar" class="avatar" value="${addFormPopup.picture}">Picture(Url)</label>
                 <input type="url" class="form-control" id="addAvatar">
             </div>
             <div class="d-flex flex-row">
