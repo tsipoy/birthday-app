@@ -3,7 +3,7 @@ console.log("It works");
 const endpoint = "./people.json";
 const addButton = document.querySelector(".add-buttton")
 const birthdayData = document.querySelector("tbody");
-const div = document.querySelector('.wrapper');
+const select = document.querySelector('.select-by-month');
 const input = document.querySelector('[name="filter"]');
 
 async function fetchBirthday() {
@@ -12,8 +12,8 @@ async function fetchBirthday() {
     let data = await response.json();
 
     // loclal storage
-    localStorage.setItem("people", JSON.stringify(data));
-    var item = JSON.parse(localStorage.getItem("people"));
+    // localStorage.setItem("people", JSON.stringify(data));
+    // var item = JSON.parse(localStorage.getItem("people"));
 
     async function destroyPopup(openPopup) {
         openPopup.classList.remove('open');
@@ -40,8 +40,8 @@ async function fetchBirthday() {
             }
             const year = calculateAge(new Date(person.birthday));
 
-            const date = new Date(person.birthday);
-            const month = date.toLocaleString('default', { month: 'long' });
+            let date = new Date(person.birthday);
+            let month = date.toLocaleString('default', { month: 'long' });
             const birthDay = date.getDate();
 
             // const dateDiffInDays = function(date1, date2) {
@@ -179,9 +179,12 @@ async function fetchBirthday() {
                 id: Date.now(),
             };
             data.push(newPeople);
-            console.log(newPeople);
-            generatedBirthday(addFormPopup);
+            console.log(data);
+            generatedBirthday(newPeople);
             destroyPopup(addFormPopup);
+            updateLocalStorage();
+
+            // birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
 
         }, { once: true });
 
@@ -206,20 +209,21 @@ async function fetchBirthday() {
         if (e.target.closest('button.edit')) {
             const tableRow = e.target.closest('tr');
             console.log(tableRow);
-            const editForm = tableRow.dataset.id;
-            editPopup(editForm);
+            const id = tableRow.dataset.id;
+
+            editPopup(id);
         }
     }
 
 
     // open modal 
     const editPopup = editId => {
-        const editIdPopup = data.find(person => person.id === editId);
+        const editIdPopup = data.find(person => person.id === editId || person.id == editId);
         return new Promise(async function (resolve) {
             const formPopup = document.createElement('form');
             formPopup.classList.add('popup');
             formPopup.classList.add('open');
-
+            console.log(editIdPopup.lastName);
             formPopup.insertAdjacentHTML('afterbegin',
                 `
                 <fieldset> 
@@ -233,7 +237,7 @@ async function fetchBirthday() {
                         </div>
                         <div class="form-group">
                             <label for="birthday">Birthday</label>
-                            <input type="date" class="form-control" id="birthdayId" min="1970-01-01" max="2021-12-31" name="birthday-date">
+                            <input type="date" class="form-control" id="birthdayId" name="birthday-date">
                         </div>
                         <div class="form-group">
                             <label for="url">Your avatar image</label>
@@ -259,6 +263,9 @@ async function fetchBirthday() {
                 generatedBirthday(editIdPopup);
                 // resolve(e.target.displayList(editIdPopup));
                 destroyPopup(formPopup);
+                // birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
+                updateLocalStorage();
+
 
             }, { once: true });
 
@@ -290,7 +297,9 @@ async function fetchBirthday() {
     }
 
     const deletedData = deletedId => {
-        const deletePeople = data.find(person => person.id !== deletedId);
+        const deletePeople = data.find(person => person.id !== deletedId || person.id != deletedId);
+
+        console.log(data);
         return new Promise(async function (resolve) {
             const openDiv = document.createElement('article');
             openDiv.classList.add('open');
@@ -298,8 +307,8 @@ async function fetchBirthday() {
                 `
                 <article class="delete-confirm" data-id="${openDiv.id}">
                     <p>Are you sure you want to delete it!</p>
-                    <button class="delete-button" name="deleteBtn" type="button" value="${openDiv.id}">Delete</button>
-                    <button class="cancel-button cancel" name="cancel" type="button" value="${openDiv.id}">Cancel</button>
+                    <button class="delete-button" name="deleteBtn" type="button" data-id="${openDiv.id}">Delete</button>
+                    <button class="cancel-button cancel" name="cancel" type="button" data-id="${openDiv.id}">Cancel</button>
                 </article>
             `
             );
@@ -312,14 +321,16 @@ async function fetchBirthday() {
             }
 
             openDiv.addEventListener('click', () => {
-                const deletePersonBirthday = data.filter(person => person.id !== deletedId);
+                const deletePersonBirthday = data.filter(person => person.id != deletedId);
                 const deleteConfirm = document.querySelector("button.delete-button");
                 if (deleteConfirm) {
                     data = deletePersonBirthday;
                     generatedBirthday(data);
                     destroyPopup(openDiv);
                     console.log("You delete it");
-                    birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
+                    // birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
+                    updateLocalStorage();
+
                 }
             });
 
@@ -329,6 +340,25 @@ async function fetchBirthday() {
             openDiv.classList.add('popup');
         })
     }
+
+    console.log(data)
+    const initLocalStorage = () => { 
+        const stringForm = localStorage.getItem('data');
+        const listItems = JSON.parse(stringForm);
+
+        if (listItems) {
+            peopleData = listItems;
+            console.log(peopleData)
+        } else {
+            peopleData = data;
+        }
+        generatedBirthday(peopleData);
+            updateLocalStorage();
+    }
+
+    const updateLocalStorage = () => {
+        localStorage.setItem('data', JSON.stringify(data));
+    };
 
     // Filter input
     const searchInput = (e) => {
@@ -340,17 +370,25 @@ async function fetchBirthday() {
     }
 
     // filter select
-    // const select = document.querySelector('.select');
-    // const selectForMonth = (e) => {
+    const selectForMonth = (e) => {
+        const filterSelect = select.value;
+        // const date = new Date(person.birthday);
+        // const month = date.toLocaleString('default', { month: 'long' });
+        console.log(filterSelect);
+        const filterBirthdayByMonth = data.filter(data => data[new Date(data.birthday).toLocaleString('default', { month: 'long' }).toLowerCase().includes(filterSelect.toLowerCase())] === data.filterSelect);
+        const filterBirthdayByMonthHtml = generatedBirthday(filterBirthdayByMonth);
+        birthdayData.innerHTML = filterBirthdayByMonthHtml;
+    }
 
-    // }
-
-    // select.addEventListener('click', selectForMonth).
+    select.addEventListener('change', selectForMonth);
 
     input.addEventListener('input', searchInput);
     birthdayData.addEventListener('submit', addPeople);
     window.addEventListener('click', popupBirthday);
     window.addEventListener('click', deletedPopup);
+    // birthdayData.addEventListener('updatedBirthday', updateLocalStorage);
+
+    initLocalStorage();
 }
 
 fetchBirthday();
