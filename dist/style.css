@@ -1,0 +1,95 @@
+.header {
+	padding-block-end: 3rem;
+}
+h1, 
+.header {
+	text-align: center;
+}
+
+.table {
+	background-color: #55423d;
+}
+
+thead, 
+.header {
+	background-color: #9656a1;
+}
+
+th {
+	font-size: 24px;
+}
+
+h1,
+thead {
+	color: #fffffe;
+}
+
+td,
+.select {
+	color: #fff3ec;
+}
+
+.add-buttton {
+	margin: 24px;
+}
+
+.popup {
+	background: rgba(37, 36, 36, 0.3);
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	transition: all 0.25s;
+	top: 0;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+	--opacity: 0;
+	opacity: var(--opacity);
+	padding: 1rem;
+}
+
+.popup fieldset {
+	display: flex;
+	flex-direction: column;
+	background: var(--grey);
+	padding: 2rem;
+	border: 3px solid var(--pink);
+	border-radius: 5px;
+	box-shadow: var(--box-shadow);
+	transition: all 0.2s;
+	--scale: 0.3;
+	transform: scale(var(--scale));
+}
+
+.popup.open {
+	--opacity: 1;
+	pointer-events: all;
+}
+
+.popup.open fieldset,
+.delete-confirm {
+    --scale: 1;
+    background-color: aliceblue;
+}
+
+.delete-confirm {
+	padding: 2rem;
+	border-radius: 5px;
+}
+
+td button.edit,
+.delete {
+    border: none;
+    background-color: transparent;
+}
+
+.delete, 
+.edit img {
+    max-width: 50px;
+}
+
+.select {
+	padding-inline-start: 3rem;
+	padding-inline-end: 1rem;
+}
