@@ -41,9 +41,9 @@ async function fetchBirthday() {
             const year = calculateAge(new Date(person.birthday));
 
             let date = new Date(person.birthday);
+            // console.log(date.toLocaleString('default', { month: 'long' }))
             let month = date.toLocaleString('default', { month: 'long' });
             const birthDay = date.getDate();
-
             // const dateDiffInDays = function(date1, date2) {
             //     dt1 = new Date(date1);
             //     dt2 = new Date(date2);
@@ -375,7 +375,7 @@ async function fetchBirthday() {
         // const date = new Date(person.birthday);
         // const month = date.toLocaleString('default', { month: 'long' });
         console.log(filterSelect);
-        const filterBirthdayByMonth = data.filter(data => data[new Date(data.birthday).toLocaleString('default', { month: 'long' }).toLowerCase().includes(filterSelect.toLowerCase())] === data.filterSelect);
+        const filterBirthdayByMonth = data.filter(data => date.toLocaleString('default', { month: 'long' }).toLocaleString('default', { month: 'long' }).toLowerCase().includes(filterSelect.toLowerCase()) === data.filterSelect.value);
         const filterBirthdayByMonthHtml = generatedBirthday(filterBirthdayByMonth);
         birthdayData.innerHTML = filterBirthdayByMonthHtml;
     }
