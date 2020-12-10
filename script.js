@@ -41,7 +41,6 @@ async function fetchBirthday() {
             const year = calculateAge(new Date(person.birthday));
 
             let date = new Date(person.birthday);
-            // console.log(date.toLocaleString('default', { month: 'long' }))
             let month = date.toLocaleString('default', { month: 'long' });
             const birthDay = date.getDate();
             // const dateDiffInDays = function(date1, date2) {
@@ -95,14 +94,13 @@ async function fetchBirthday() {
                     </td>
                 </tr>
         `;
-        }).join('')
+        }).join('');
     };
     const generatedBirthday = () => {
         const html = populateBirthday(data);
         birthdayData.innerHTML = html;
     }
     generatedBirthday();
-
 
     let peopleData = [];
     const addPeople = e => {
@@ -372,15 +370,29 @@ async function fetchBirthday() {
     // filter select
     const selectForMonth = (e) => {
         const filterSelect = select.value;
-        // const date = new Date(person.birthday);
-        // const month = date.toLocaleString('default', { month: 'long' });
-        console.log(filterSelect);
-        const filterBirthdayByMonth = data.filter(data => date.toLocaleString('default', { month: 'long' }).toLocaleString('default', { month: 'long' }).toLowerCase().includes(filterSelect.toLowerCase()) === data.filterSelect.value);
-        const filterBirthdayByMonthHtml = generatedBirthday(filterBirthdayByMonth);
+        const date = Date.now(data.birthday);
+        console.log(date);
+        console.log(data.birthday);
+        const filterBirthdayByMonth = data.filter(data => data.birthday.toLocaleString().includes(filterSelect.toLowerCase()));
+        const filterBirthdayByMonthHtml = populateBirthday(filterBirthdayByMonth);
         birthdayData.innerHTML = filterBirthdayByMonthHtml;
     }
 
-    select.addEventListener('change', selectForMonth);
+    select.addEventListener('change', selectForMonth)
+
+
+    // select.addEventListener('change', function (e) {
+    //     let filteredArr = data.filter(item => {
+    //         let date = new Date(item.birthDay);
+    //         let monthName = date.toLocaleString('default', {month: 'long'});
+
+    //         return monthName = e.target.value;
+    //     })
+
+    //     let month = populateBirthday(filteredArr);
+    //     birthdayData.innerHTML = month;
+    // });
+
 
     input.addEventListener('input', searchInput);
     birthdayData.addEventListener('submit', addPeople);
