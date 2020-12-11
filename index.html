@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Birthday App</title>
-		<link rel="stylesheet" href="./style.css">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	</head>
-	<body class="ml-3">
-		<div class="wrapper">
-			<div class="header">
-				<h1>Birthday App<img src="./images/birthday-cake.png" alt width="50px"></h1>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Birthday App</title>
+	<link rel="stylesheet" href="./style.css">
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="ml-3">
+	<div class="wrapper">
+		<div class="header">
+			<h1>Birthday App<img src="./images/birthday-cake.png" alt width="50px"></h1>
+			<div class="search-header">
 				<button class="add-buttton">Add a new birthday</button>
-				<label for="filter" class="lastname-label">
-					<input type="text" class="filter-input" id="filter" placeholder="Research" name="filter">
-				</label>
-				<label for="select-for-month" class="select">Select by Month</label>
-					<select name="select" id="select-for-month" class="select-by-month">
+				<fieldset>
+					<label for="filter" class="lastname-label">Filter by name</label>
+					<input type="text" class="filter-input" id="filter" placeholder="Type a name" name="filter">
+				</fieldset>
+				<fieldset>
+					<label for="select-for-month" class="select">Select by Month</label>
+					<select name="select" id="select-for-month" class="select-by-month" placeholder="Select a Month">
 						<option value="January">January</option>
 						<option value="February">February</option>
 						<option value="March">March</option>
@@ -30,24 +37,27 @@
 						<option value="November">November</option>
 						<option value="December">December</option>
 					</select>
+				</fieldset>
 			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">Images</th>
-						<th scope="col">Lastname</th>
-						<th scope="col">Firstname</th>
-						<th scope="col">Birthday</th>
-						<th scope="col">Days</th>
-						<th scope="col">Edit</th>
-						<th scope="col">Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					
-				</tbody>
-			</table>
 		</div>
-		<script src="script.js"></script>
-	</body>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Images</th>
+					<th scope="col">Lastname</th>
+					<th scope="col">Firstname</th>
+					<th scope="col">Birthday</th>
+					<th scope="col">Days</th>
+					<th scope="col">Edit</th>
+					<th scope="col">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+	</div>
+	<script src="script.js"></script>
+</body>
+
 </html>

@@ -1,14 +1,82 @@
+.wrapper {
+	margin: auto;
+	max-width: 900px;
+}
 .header {
 	padding-block-end: 3rem;
 }
+
+.search-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+fieldset {
+	display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.select {
+	padding-inline-end: 1rem;
+}
+
+input, select {
+	border: none;
+	border-radius: 5px;
+	padding-block-start: 10px;
+	padding-block-end: 10px;
+	padding-inline-start: 16px;
+	padding-inline-start: 16px;
+}
+
 h1, 
 .header {
 	text-align: center;
 }
 
-.table {
-	background-color: #55423d;
+.add-buttton {
+	font-size: 18px;
+    line-height: 21px;
+    background-color: rgb(243, 63, 93);
+    color: white;
+    border-radius: 5px;
+    padding-block-start: 16px;
+    padding-block-end: 16px;
+    padding-inline-end: 18px;
+    padding-inline-start: 18px;
+    border: none;
 }
+
+.table {
+	background-color: #83331d;
+	max-width: 100%;
+}
+
+b {
+	color: rgb(243, 63, 93);
+}
+
+.icons {
+	color: rgb(243, 231, 63);
+}
+
+tr:nth-of-type(2n) {
+	background-color: rgb(70, 32, 32);
+}
+
+/* table{
+	table-layout: fixed;
+}
+td, th{
+	overflow: hidden;
+	white-space: nowrap;
+	-moz-text-overflow: ellipsis;        
+	-ms-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+} */
 
 thead, 
 .header {
@@ -25,8 +93,13 @@ thead {
 }
 
 td,
-.select {
+label {
 	color: #fff3ec;
+}
+
+img {
+	width: 100px;
+	border-radius: 50%;
 }
 
 .add-buttton {
@@ -34,7 +107,7 @@ td,
 }
 
 .popup {
-	background: rgba(37, 36, 36, 0.3);
+background: rgba(37, 36, 36, 0.3);
 	position: fixed;
 	height: 100vh;
 	width: 100vw;
@@ -87,9 +160,4 @@ td button.edit,
 .delete, 
 .edit img {
     max-width: 50px;
-}
-
-.select {
-	padding-inline-start: 3rem;
-	padding-inline-end: 1rem;
 }
