@@ -98,9 +98,13 @@ thead {
 	color: black;
 }
 
-td,
-label {
-	color: #fff3ec;
+td {
+	color: white;
+}
+
+.lastname-label,
+.select {
+	color: black;
 }
 
 img {
@@ -133,7 +137,6 @@ background: rgba(37, 36, 36, 0.3);
 	flex-direction: column;
 	background: var(--grey);
 	padding: 2rem;
-	border: 3px solid var(--pink);
 	border-radius: 5px;
 	box-shadow: var(--box-shadow);
 	transition: all 0.2s;
@@ -148,8 +151,9 @@ background: rgba(37, 36, 36, 0.3);
 
 .popup.open fieldset,
 .delete-confirm {
-    --scale: 1;
+	--scale: 1;
     background-color: aliceblue;
+	border: 3px solid var(--pink);
 }
 
 .delete-confirm {
