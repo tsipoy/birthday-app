@@ -1,6 +1,6 @@
-const endpoint = "./people.json";
+const endpoint = "https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/93debb7463fbaaec29622221b8f9e719bd5b119f/birthdayPeople.json";
 const addButton = document.querySelector(".add-buttton");
-const birthdayData = document.querySelector("tbody");
+let birthdayData = document.querySelector("tbody");
 const select = document.querySelector(".select-by-month");
 const input = document.querySelector('[name="filter"]');
 
@@ -72,7 +72,7 @@ async function fetchBirthday() {
                         <i class="ri-delete-bin-line icons"></i>
                     </button>
                 </td>
-                </tr>
+            </tr>
         `;
       })
       .join("");
@@ -348,19 +348,11 @@ async function fetchBirthday() {
     );
     const filterFromHtml = populateBirthday(filterBirthday);
     birthdayData.innerHTML = filterFromHtml;
+    if (filterBirthday.length < 0) {
+        console.log("Nobody matches that filter options.")
+        birthdayData = `<p><i>Nobody matches that filter options.</p>`;
+    }
   };
-
-  // filter select
-//   const selectForMonth = (e) => {
-//     const filterSelect = select.value;
-//     const date = Date.now(data.birthday);
-//     const filterBirthdayByMonth = data.filter((data) =>
-//       data.birthday.toLocaleString().includes(filterSelect.toLowerCase())
-//     );
-//     const filterBirthdayByMonthHtml = populateBirthday(filterBirthdayByMonth);
-//     birthdayData.innerHTML = filterBirthdayByMonthHtml;
-//   };
-
 
 select.addEventListener('change', function (e) {
     let filteredArr = data.filter(item => {
@@ -372,6 +364,7 @@ select.addEventListener('change', function (e) {
     
     let month = populateBirthday(filteredArr);
     birthdayData.innerHTML = month;
+
 });
 
     // select.addEventListener("change", selectForMonth);
