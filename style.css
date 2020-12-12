@@ -56,7 +56,7 @@ h1,
 }
 
 .table {
-	background-color: #83331d;
+	background-color: #b15a43;
 	max-width: 100%;
 }
 
@@ -69,7 +69,7 @@ b {
 }
 
 tr:nth-of-type(2n) {
-	background-color: rgb(70, 32, 32);
+	background-color: rgb(114, 35, 35);
 }
 
 /* table{
@@ -86,7 +86,7 @@ td, th{
 
 thead, 
 .header {
-	background-color: #9656a1;
+	background-color: aliceblue;
 }
 
 th {
@@ -95,7 +95,7 @@ th {
 
 h1,
 thead {
-	color: #fffffe;
+	color: black;
 }
 
 td,
