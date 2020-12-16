@@ -118,9 +118,9 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"script.js":[function(require,module,exports) {
-const endpoint = "https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/93debb7463fbaaec29622221b8f9e719bd5b119f/birthdayPeople.json";
+const endpoint = "https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/b17e08696906abeaac8bc260f57738eaa3f6abb1/birthdayPeople.json";
 const addButton = document.querySelector(".add-buttton");
-let birthdayData = document.querySelector("tbody");
+let birthdayData = document.querySelector("div.main-content");
 const select = document.querySelector(".select-by-month");
 const input = document.querySelector('[name="filter"]');
 
@@ -175,28 +175,31 @@ async function fetchBirthday() {
 
       const diff = Math.floor((birthdayDate - today) / (1000 * 60 * 60 * 24));
       return `
-            <tr data-id="${person.id}" class="table-row">
-                <td class="picture">
-                    <img src="${person.picture}" alt="${person.firstName}">
-                </td>
-                <td class="lastname" data-value="${person.lastName}">${person.lastName}</td>
-                <td class="firstname" data-value="${person.firstName}">${person.firstName}</td>
-                <td class="birthday">Turns <b>${year}</b> on the ${birthDay}
-                    <sup>${daySuffix(birthDay)}</sup> 
-                    of ${month}
-                </td>
-                <td class="leftDay">In ${diff}<br></td>
-                <td class="edit-btn">
-                    <button class="edit" value="${person.id}">
-                        <i class="ri-edit-box-fill icons"></i> 
-                    </button>
-                    </td>
-                    <td class="delete-btn">
-                    <button class="delete" value="${person.id}">
-                        <i class="ri-delete-bin-line icons"></i>
-                    </button>
-                </td>
-            </tr>
+            <nav data-id="${person.id}" class="table-row">
+              <img src="${person.picture}" alt="${person.firstName}" class="picture">
+              <ul>
+                <li class="lastname" data-value="${person.lastName}">${person.lastName} 
+                <li class="firstname" data-value="${person.firstName}">${person.firstName}</li>
+              </ul>
+              
+                <span class="birthday">Turns <b>${year}</b> on the ${birthDay}
+                <sup>${daySuffix(birthDay)}</sup> 
+                  of ${month}</span>
+              </li>
+              <li class="leftDay">In ${diff} days<br></li>
+              <div class="buttons-wrapper">
+                <li class="edit-btn">
+                  <button class="edit" value="${person.id}">
+                    <i class="ri-edit-box-fill icons"></i> 
+                  </button>
+                </li>
+                <li class="delete-btn">
+                  <button class="delete" value="${person.id}">
+                    <i class="ri-delete-bin-line icons"></i>
+                  </button>
+                </li>
+              </div>
+            </nav>
         `;
     }).join("");
   };
@@ -300,7 +303,7 @@ async function fetchBirthday() {
 
   const popupBirthday = e => {
     if (e.target.closest("button.edit")) {
-      const tableRow = e.target.closest("tr");
+      const tableRow = e.target.closest("nav");
       const id = tableRow.dataset.id;
       editPopup(id);
     }
@@ -372,7 +375,7 @@ async function fetchBirthday() {
     const deletedTr = e.target.closest("button.delete");
 
     if (deletedTr) {
-      const tr = e.target.closest("tr");
+      const tr = e.target.closest("nav");
       const deletedFromId = tr.dataset.id;
       deletedData(deletedFromId);
     }
@@ -449,11 +452,11 @@ async function fetchBirthday() {
     }
   };
 
-  select.addEventListener('change', function (e) {
+  select.addEventListener("change", function (e) {
     let filteredArr = data.filter(item => {
       let date = new Date(item.birthday);
-      let monthName = date.toLocaleString('default', {
-        month: 'long'
+      let monthName = date.toLocaleString("default", {
+        month: "long"
       });
       return monthName == e.target.value;
     });
@@ -498,7 +501,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63726" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

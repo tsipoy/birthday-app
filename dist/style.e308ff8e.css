@@ -2,6 +2,15 @@ body {
 	margin: 0;
 }
 
+body {
+	background-color: #D8EEFE;
+}
+
+html {
+	font-family: 'Rubik', sans-serif;
+	color: #094067;
+}
+
 .wrapper {
 	margin: auto;
 	max-width: 900px;
@@ -11,11 +20,24 @@ body {
 	padding-block-end: 3rem;
 }
 
+ul {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+fieldset {
+	border: none;
+}
+
 .search-header {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	flex-wrap: wrap;
+	padding-inline-start: 16px;
 }
 
 fieldset {

@@ -7,8 +7,8 @@
 	<title>Birthday App</title>
 	<link rel="stylesheet" href="./style.css">
 	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="ml-3">
@@ -16,7 +16,6 @@
 		<div class="header">
 			<h1>Birthday App<img src="./images/birthday-cake.png" alt width="50px"></h1>
 			<div class="search-header">
-				<button class="add-buttton">Add a new birthday</button>
 				<fieldset>
 					<label for="filter" class="lastname-label">Filter by name</label>
 					<input type="text" class="filter-input" id="filter" placeholder="Type a name" name="filter">
@@ -38,24 +37,14 @@
 						<option value="December">December</option>
 					</select>
 				</fieldset>
+				<button class="add-buttton">Add a new birthday</button>
 			</div>
 		</div>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">Images</th>
-					<th scope="col">Lastname</th>
-					<th scope="col">Firstname</th>
-					<th scope="col">Birthday</th>
-					<th scope="col">Days</th>
-					<th scope="col">Edit</th>
-					<th scope="col">Delete</th>
-				</tr>
-			</thead>
-			<tbody>
+		<div class="table">
+			<div class="main-content">
 
-			</tbody>
-		</table>
+			</div>
+		</div>
 	</div>
 	<script src="script.js"></script>
 </body>
