@@ -52,31 +52,41 @@ async function fetchBirthday() {
         const diff = Math.floor((birthdayDate - today) / (1000 * 60 * 60 * 24));
 
         return `
-            <nav data-id="${person.id}" class="table-row">
-              <img src="${person.picture}" alt="${person.firstName}" class="picture">
-              <ul>
-                <li class="lastname" data-value="${person.lastName}">${person.lastName} 
-                <li class="firstname" data-value="${person.firstName}">${person.firstName}</li>
-              </ul>
-              
-                <span class="birthday">Turns <b>${year}</b> on the ${birthDay}
-                <sup>${daySuffix(birthDay)}</sup> 
-                  of ${month}</span>
-              </li>
-              <li class="leftDay">In ${diff} days<br></li>
-              <div class="buttons-wrapper">
-                <li class="edit-btn">
-                  <button class="edit" value="${person.id}">
-                    <i class="ri-edit-box-fill icons"></i> 
-                  </button>
-                </li>
-                <li class="delete-btn">
-                  <button class="delete" value="${person.id}">
-                    <i class="ri-delete-bin-line icons"></i>
-                  </button>
-                </li>
+            <div data-id="${person.id}" class="birthday-lists">
+              <img src="${person.picture}" alt="${
+          person.firstName
+        }" class="picture">
+              <div class="name-birthday">
+                <ul class="person-name">
+                  <li class="lastname" data-value="${person.lastName}">${
+          person.lastName
+        } 
+                  <li class="firstname" data-value="${person.firstName}">${
+          person.firstName
+        }</li>
+                </ul>
+                <div>
+                  <span class="birthday">Turns <b>${year}</b> on ${month} ${birthDay}
+                  <sup>${daySuffix(birthDay)}</sup> 
+                  </span>
+                </div>
               </div>
-            </nav>
+              <nav class="buttons-wrapper">
+                <p class="leftDay">In ${diff} days<br></p>
+                <ul class="icons-wrapper">
+                  <li class="edit-btn">
+                    <button class="edit" value="${person.id}">
+                      <i class="ri-edit-box-fill icons-edit"></i> 
+                    </button>
+                  </li>
+                  <li class="delete-btn">
+                    <button class="delete" value="${person.id}">
+                      <i class="ri-delete-bin-line icons-delete"></i>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
         `;
       })
       .join("");
@@ -192,7 +202,7 @@ async function fetchBirthday() {
 
   const popupBirthday = (e) => {
     if (e.target.closest("button.edit")) {
-      const tableRow = e.target.closest("nav");
+      const tableRow = e.target.closest("div");
       const id = tableRow.dataset.id;
       editPopup(id);
     }
@@ -275,7 +285,7 @@ async function fetchBirthday() {
   const deletedPopup = (e) => {
     const deletedTr = e.target.closest("button.delete");
     if (deletedTr) {
-      const tr = e.target.closest("nav");
+      const tr = e.target.closest("div");
       const deletedFromId = tr.dataset.id;
       deletedData(deletedFromId);
     }
@@ -369,6 +379,19 @@ async function fetchBirthday() {
     let month = populateBirthday(filteredArr);
     birthdayData.innerHTML = month;
   });
+
+  // const select = document.getElementById("filter_month");
+  // select.addEventListener("change", filteredMonth);
+  // function filteredMonth() {
+  //   const filteredBirthday = birthdayList.filter(function(month) {
+    // let date = new Date(month.birthday);
+//let monthName = date.toLocalString("default", { month: "long"})
+  //     return monthName == e.target.value;
+  //   });
+  //   let months = displayList(filteredBirthday);
+  //   console.log(filterBirthday);
+  // listOfBirthday.innerHtml = months
+  // }
 
   // select.addEventListener("change", selectForMonth);
   input.addEventListener("input", searchInput);

@@ -1,14 +1,20 @@
 body {
 	margin: 0;
-}
-
-body {
-	background-color: #D8EEFE;
+	background: #D8EEFE;
 }
 
 html {
 	font-family: 'Rubik', sans-serif;
+	color:  #094067;
+}
+
+h1 {
 	color: #094067;
+	font-size: 64px;
+	line-height: 76px;
+	text-align: start;
+	margin-block-start: 0;
+    padding-block-start: 63px;
 }
 
 .wrapper {
@@ -20,13 +26,6 @@ html {
 	padding-block-end: 3rem;
 }
 
-ul {
-	list-style: none;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	flex-wrap: wrap;
-}
 
 fieldset {
 	border: none;
@@ -37,7 +36,7 @@ fieldset {
 	flex-direction: row;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	padding-inline-start: 16px;
+	margin-inline-start: -13px;
 }
 
 fieldset {
@@ -46,8 +45,23 @@ fieldset {
     align-items: baseline;
 }
 
-.select {
+.select-by-month {
 	padding-inline-end: 1rem;
+	font-size: 18px;
+    line-height: 21px;
+    color: #094067;
+}
+
+.lastname-label,
+.select {
+	padding-block-end: 13px;
+}
+
+.filter-input,
+.lastname-label {
+	font-size: 18px;
+    line-height: 21px;
+    color: #094067;
 }
 
 input, select {
@@ -59,9 +73,48 @@ input, select {
 	padding-inline-start: 16px;
 }
 
-h1, 
-.header {
-	text-align: center;
+
+ul {
+	padding-inline-start: 0;
+}
+
+.person-name {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	flex-wrap: wrap;
+}
+
+.person-name li {
+	padding-inline-end: 5px;
+	font-size: 36px;
+	line-height: 43px;
+	color: #000000;
+
+}
+
+.birthday-lists {
+	background-color: #ffffff;
+	margin-block-end: 31px;
+	border-radius: 5px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	padding-inline-start: 43px;
+	align-items: center;
+	padding-block-end: 23px;
+	padding-block-start: 22px;
+}
+
+.name-birthday {
+	margin-inline-start: -143px;
+}
+
+.birthday, 
+.leftDay {
+	font-size: 24px;
+    line-height: 28px;
+    color: #5F6C7B;
 }
 
 .add-buttton {
@@ -77,22 +130,41 @@ h1,
     border: none;
 }
 
-.table {
+li {
+	list-style: none;
+}
+
+.picture {
+	border-radius: 5px;
+}
+
+/* .table {
 	background-color: #b15a43;
 	max-width: 100%;
-}
+} */
 
 b {
 	color: rgb(243, 63, 93);
 }
 
-.icons {
-	color: rgb(243, 231, 63);
+.ri-edit-box-fill icons-edit {
+	color: #5F6C7B;
 }
 
-tr:nth-of-type(2n) {
-	background-color: rgb(114, 35, 35);
+.ri-delete-bin-line icons-delete {
+	color: #EF4565;
 }
+
+.icons-wrapper {
+	display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+
+/* tr:nth-of-type(2n) {
+	background-color: rgb(114, 35, 35);
+} */
 
 /* table{
 	table-layout: fixed;
@@ -106,28 +178,28 @@ td, th{
 	text-overflow: ellipsis;
 } */
 
-thead, 
+/* thead, 
 .header {
 	background-color: aliceblue;
 }
 
 th {
 	font-size: 24px;
-}
+} */
 
-h1,
+/* h1,
 thead {
 	color: black;
-}
+} */
 
-td {
+/* td {
 	color: white;
-}
+} */
 
-.lastname-label,
+/* .lastname-label,
 .select {
 	color: black;
-}
+} */
 
 img {
 	width: 100px;
