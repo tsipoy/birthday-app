@@ -138,20 +138,15 @@ li {
 	border-radius: 5px;
 }
 
-/* .table {
-	background-color: #b15a43;
-	max-width: 100%;
-} */
-
 b {
-	color: rgb(243, 63, 93);
+	color: #EF4565;
 }
 
-.ri-edit-box-fill icons-edit {
+.icons-edit {
 	color: #5F6C7B;
 }
 
-.ri-delete-bin-line icons-delete {
+.icons-delete {
 	color: #EF4565;
 }
 
@@ -161,45 +156,9 @@ b {
     align-items: baseline;
 }
 
-
-/* tr:nth-of-type(2n) {
-	background-color: rgb(114, 35, 35);
-} */
-
-/* table{
-	table-layout: fixed;
+.buttons-wrapper {
+	padding-inline-start: 127px;
 }
-td, th{
-	overflow: hidden;
-	white-space: nowrap;
-	-moz-text-overflow: ellipsis;        
-	-ms-text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-} */
-
-/* thead, 
-.header {
-	background-color: aliceblue;
-}
-
-th {
-	font-size: 24px;
-} */
-
-/* h1,
-thead {
-	color: black;
-} */
-
-/* td {
-	color: white;
-} */
-
-/* .lastname-label,
-.select {
-	color: black;
-} */
 
 img {
 	width: 100px;
@@ -211,14 +170,14 @@ img {
 }
 
 .popup {
-background: rgba(37, 36, 36, 0.3);
+	background: aliceblue;
 	position: fixed;
 	height: 100vh;
 	width: 100vw;
 	transition: all 0.25s;
 	top: 0;
 	display: grid;
-	justify-content: center;
+	justify-content: stretch;
 	align-items: center;
 	pointer-events: none;
 	--opacity: 0;
@@ -230,7 +189,10 @@ background: rgba(37, 36, 36, 0.3);
 	display: flex;
 	flex-direction: column;
 	background: var(--grey);
-	padding: 2rem;
+    padding-block-start: 2rem;
+    padding-block-end: 2rem;
+    margin-inline-start: 100px;
+    margin-inline-end: 110px;
 	border-radius: 5px;
 	box-shadow: var(--box-shadow);
 	transition: all 0.2s;
@@ -246,7 +208,7 @@ background: rgba(37, 36, 36, 0.3);
 .popup.open fieldset,
 .delete-confirm {
 	--scale: 1;
-    background-color: aliceblue;
+    background-color: #ffffff;
 	border: 3px solid var(--pink);
 }
 
@@ -264,4 +226,52 @@ td button.edit,
 .delete, 
 .edit img {
     max-width: 50px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.label {
+	padding-block-end: 8px;
+	padding-block-start: 16px;
+}
+
+.form-control {
+	background-color: #D8EEFE;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.submitbtn {
+	font-size: 18px;
+    line-height: 21px;
+    background-color: rgb(243, 63, 93);
+    color: white;
+    padding-block-start: 16px;
+    padding-block-end: 16px;
+	padding-inline-start: 18px;
+    padding-inline-end: 18px;
+	margin-inline-end: 36px;
+    width: 67%;
+    border: none;
+	border-radius: 5px;	
+}
+
+.close-btn {
+	font-size: 18px;
+    line-height: 21px;
+    padding-block-start: 16px;
+    padding-block-end: 16px;
+    width: 117%;
+	background-color: #ffffff;
+    border: 2px solid #5F6C7B;
+    color: #5F6C7B;
+	box-sizing: border-box;
+	border-radius: 5px;	
 }

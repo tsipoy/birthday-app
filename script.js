@@ -32,19 +32,28 @@ async function fetchBirthday() {
           }
         };
 
+        let birthdayYear;
         const calculateAge = (age) => {
           const msDate = Date.now() - age.getTime();
           const ageDate = new Date(msDate);
           return Math.abs(ageDate.getFullYear() - 1970) + 1;
         };
         const year = calculateAge(new Date(person.birthday));
-
+        
+        // const currentDate = new Date();
         let date = new Date(person.birthday);
+        
         let month = date.toLocaleString("default", { month: "long" });
         const birthDay = date.getDate();
-
+        
         const today = new Date();
         const birthdayDate = new Date(person.birthday);
+
+        // if(date.getMonth() <  currentDate.getMonth()) {
+        //   birthdayYear = today.getFullYear() + 1;
+        //   year++;
+        // }
+
         if (today > birthdayDate) {
           birthdayDate.setFullYear(today.getFullYear() + 1);
         }
@@ -221,25 +230,26 @@ async function fetchBirthday() {
         "afterbegin",
         `
                 <fieldset> 
+                    <h2>Edit ${editIdPopup.lastName} ${editIdPopup.firstName}</h2>
                     <div class="form-group">
-                        <label for="lastname">Lastname</label>
+                        <label class="label" for="lastname">Lastname</label>
                         <input type="text" class="form-control" id="lastnameId" value="${editIdPopup.lastName}">
                     </div>
                     <div class="form-group">
-                        <label for="firstname">Firstname</label>
+                        <label class="label" for="firstname">Firstname</label>
                         <input type="text" class="form-control" id="firstnameId" aria-describedby="firstnameHelp" value="${editIdPopup.firstName}">
                     </div>
                     <div class="form-group">
-                        <label for="birthday">Birthday</label>
+                        <label class="label" for="birthday">Birthday</label>
                         <input type="date" class="form-control" id="birthdayId" name="birthday-date">
                     </div>
                     <div class="form-group">
-                        <label for="url">Your avatar image</label>
+                        <label class="label" for="url">Your avatar image</label>
                         <input type="url" class="form-control" id="urlId" value="${editIdPopup.picture}">
                     </div>
                     <div class="d-flex flex-row">
-                        <button type="submit" class="submitbtn" name="submit">Submit</button>
-                        <button class="close-btn" name="close" type="button">Close</button>
+                        <button type="submit" class="submitbtn" name="submit">Save change</button>
+                        <button class="close-btn" name="close" type="button">Cancel</button>
                     </div>
                 </fiedset>
             `
@@ -380,20 +390,6 @@ async function fetchBirthday() {
     birthdayData.innerHTML = month;
   });
 
-  // const select = document.getElementById("filter_month");
-  // select.addEventListener("change", filteredMonth);
-  // function filteredMonth() {
-  //   const filteredBirthday = birthdayList.filter(function(month) {
-    // let date = new Date(month.birthday);
-//let monthName = date.toLocalString("default", { month: "long"})
-  //     return monthName == e.target.value;
-  //   });
-  //   let months = displayList(filteredBirthday);
-  //   console.log(filterBirthday);
-  // listOfBirthday.innerHtml = months
-  // }
-
-  // select.addEventListener("change", selectForMonth);
   input.addEventListener("input", searchInput);
   birthdayData.addEventListener("submit", addPeople);
   window.addEventListener("click", popupBirthday);
