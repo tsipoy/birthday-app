@@ -38,27 +38,34 @@ async function fetchBirthday() {
           const ageDate = new Date(msDate);
           return Math.abs(ageDate.getFullYear() - 1970) + 1;
         };
-        const year = calculateAge(new Date(person.birthday));
+        let year = calculateAge(new Date(person.birthday));
         
-        // const currentDate = new Date();
         let date = new Date(person.birthday);
         
         let month = date.toLocaleString("default", { month: "long" });
         const birthDay = date.getDate();
         
         const today = new Date();
+        let birthDayYear;
         const birthdayDate = new Date(person.birthday);
 
-        // if(date.getMonth() <  currentDate.getMonth()) {
-        //   birthdayYear = today.getFullYear() + 1;
-        //   year++;
-        // }
-
-        if (today > birthdayDate) {
-          birthdayDate.setFullYear(today.getFullYear() + 1);
+        if(birthdayDate.getMonth() <  today.getMonth()) {
+          birthDayYear = today.getFullYear() + 1;
+          year++;
+        } else if (birthdayDate.getMonth() == today.getMonth() && birthdayDate.getDate() > today.getDate()) {
+          birthDayYear = today.getFullYear();
+          year = year;
+        } else if(birthdayDate.getMonth() == today.getMonth() && birthdayDate.getDate() < today.getDate()) {
+          birthDayYear = today.getFullYear() + 1;
+          year++;
+        } else {
+          birthDayYear = today.getFullYear();
         }
 
-        const diff = Math.floor((birthdayDate - today) / (1000 * 60 * 60 * 24));
+        let oneDay = 1000 * 60 * 60 * 24;
+
+        let birth = new Date(birthDayYear, birthdayDate.getMonth(), birthdayDate.getDate());
+        let diff = Math.ceil((birth.getTime() - today.getTime()) / oneDay)
 
         return `
             <div data-id="${person.id}" class="birthday-lists">

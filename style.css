@@ -99,16 +99,16 @@ ul {
 	margin-block-end: 31px;
 	border-radius: 5px;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	padding-inline-start: 43px;
 	align-items: center;
 	padding-block-end: 23px;
 	padding-block-start: 22px;
 }
 
-.name-birthday {
+/* .name-birthday {
 	margin-inline-start: -143px;
-}
+} */
 
 .birthday, 
 .leftDay {
@@ -156,9 +156,9 @@ b {
     align-items: baseline;
 }
 
-.buttons-wrapper {
+/* .buttons-wrapper {
 	padding-inline-start: 127px;
-}
+} */
 
 img {
 	width: 100px;
