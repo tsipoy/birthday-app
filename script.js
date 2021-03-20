@@ -16,7 +16,28 @@ async function fetchBirthday() {
   }
 
   const populateBirthday = (people) => {
-    return people
+    const sortedPeople = people.sort(function (a, b) {
+      function peopleBirthday(month, day) {
+        let today = new Date(),
+          currentYear = today.getFullYear(),
+          next = new Date(currentYear, month - 1, day);
+        today.setHours(0, 0, 0, 0);
+        if (today > next) next.setFullYear(currentYear + 1);
+        return Math.round((next - today) / 8.64e7);
+      }
+      let birthdayA = peopleBirthday(
+        new Date(a.birthday).getMonth() + 1,
+        new Date(a.birthday).getDate()
+      );
+      let birthdayB = peopleBirthday(
+        new Date(b.birthday).getMonth() + 1,
+        new Date(b.birthday).getDate()
+      );
+      return birthdayA - birthdayB;
+    });
+
+    console.log(sortedPeople);
+    return sortedPeople
       .map((person) => {
         const daySuffix = function (df) {
           if (df > 3 && df < 21) return "th";
@@ -39,23 +60,29 @@ async function fetchBirthday() {
           return Math.abs(ageDate.getFullYear() - 1970) + 1;
         };
         let year = calculateAge(new Date(person.birthday));
-        
+
         let date = new Date(person.birthday);
-        
+
         let month = date.toLocaleString("default", { month: "long" });
         const birthDay = date.getDate();
-        
+
         const today = new Date();
         let birthDayYear;
         const birthdayDate = new Date(person.birthday);
 
-        if(birthdayDate.getMonth() <  today.getMonth()) {
+        if (birthdayDate.getMonth() < today.getMonth()) {
           birthDayYear = today.getFullYear() + 1;
           year++;
-        } else if (birthdayDate.getMonth() == today.getMonth() && birthdayDate.getDate() > today.getDate()) {
+        } else if (
+          birthdayDate.getMonth() == today.getMonth() &&
+          birthdayDate.getDate() > today.getDate()
+        ) {
           birthDayYear = today.getFullYear();
           year = year;
-        } else if(birthdayDate.getMonth() == today.getMonth() && birthdayDate.getDate() < today.getDate()) {
+        } else if (
+          birthdayDate.getMonth() == today.getMonth() &&
+          birthdayDate.getDate() < today.getDate()
+        ) {
           birthDayYear = today.getFullYear() + 1;
           year++;
         } else {
@@ -64,8 +91,12 @@ async function fetchBirthday() {
 
         let oneDay = 1000 * 60 * 60 * 24;
 
-        let birth = new Date(birthDayYear, birthdayDate.getMonth(), birthdayDate.getDate());
-        let diff = Math.ceil((birth.getTime() - today.getTime()) / oneDay)
+        let birth = new Date(
+          birthDayYear,
+          birthdayDate.getMonth(),
+          birthdayDate.getDate()
+        );
+        let diff = Math.ceil((birth.getTime() - today.getTime()) / oneDay);
 
         return `
             <div data-id="${person.id}" class="birthday-lists">
@@ -92,12 +123,12 @@ async function fetchBirthday() {
                 <ul class="icons-wrapper">
                   <li class="edit-btn">
                     <button class="edit" value="${person.id}">
-                      <i class="ri-edit-box-fill icons-edit"></i> 
+                      <i class="ri-edit-box-line icons-edit"></i> 
                     </button>
                   </li>
                   <li class="delete-btn">
                     <button class="delete" value="${person.id}">
-                      <i class="ri-delete-bin-line icons-delete"></i>
+                      <i class="ri-delete-back-2-line icons-delete"></i>
                     </button>
                   </li>
                 </ul>
@@ -142,26 +173,28 @@ async function fetchBirthday() {
     const addFormPopup = document.createElement("form");
     addFormPopup.classList.add("popup");
     addFormPopup.classList.add("open");
+    const formatDate = new Date().toISOString().slice(0, 10);
 
     addFormPopup.insertAdjacentHTML(
       "afterbegin",
       `
-            <fieldset> 
+            <fieldset class="new-birthday"> 
+              <h2>New birthday</h2>
                 <div class="form-group">
-                    <label for="addLastname" class="lastname-label" >Lastname</label>
-                    <input type="text" class="form-control" name="lastName" id="addLastname">
+                    <label for="addLastname" class="lastname-label">Lastname</label>
+                    <input type="text" class="form-control" placeholder="Your lastname" name="lastName" id="addLastname">
                 </div>
                 <div class="form-group">
                     <label for="addFirstname" class="firstname-label">Firstname</label>
-                    <input type="text" class="form-control"  name="firstName" id="addFirstname" aria-describedby="firstnameHelp">
+                    <input type="text" class="form-control" placeholder="Your firstname"  name="firstName" id="addFirstname" aria-describedby="firstnameHelp">
                 </div>
                 <div class="form-group">
                     <label for="addBirthday" class="birthday-label">Birthday</label>
-                    <input type="date" class="form-control" name="birthday" id="addBirthday">
+                    <input type="date" class="form-control" name="birthday" id="addBirthday" max="${formatDate}">
                 </div>
                 <div class="form-group">
                     <label for="addAvatar" class="avatar">Picture(Url)</label>
-                    <input type="url" class="form-control" name="picture" id="addAvatar">
+                    <input type="url" class="form-control" placeholder="Your picture url" name="picture" id="addAvatar">
                 </div>
                 <div class="d-flex flex-row">
                     <button type="submit" class="submit-btn">Save</button>
@@ -192,6 +225,7 @@ async function fetchBirthday() {
         generatedBirthday(data);
         destroyPopup(addFormPopup);
         updateLocalStorage();
+        document.body.style.overflow = "auto";
       },
       { once: true }
     );
@@ -199,6 +233,7 @@ async function fetchBirthday() {
     // open form
     document.body.appendChild(addFormPopup);
     addFormPopup.classList.add("open");
+    document.body.style.overflow = "hidden";
     // close form
     if (addFormPopup.close) {
       const closeAddBtn = addFormPopup.close;
@@ -206,6 +241,7 @@ async function fetchBirthday() {
         "click",
         (e) => {
           destroyPopup(addFormPopup);
+          document.body.style.overflow = "auto";
         },
         { once: true }
       );
@@ -230,6 +266,9 @@ async function fetchBirthday() {
       (person) => person.id === editId || person.id == editId
     );
     return new Promise(async function (resolve) {
+      const date = new Date(editIdPopup.birthday).toISOString().slice(0, 10);
+      const formatDate = new Date().toISOString().slice(0, 10);
+
       const formPopup = document.createElement("form");
       formPopup.classList.add("popup");
       formPopup.classList.add("open");
@@ -248,7 +287,7 @@ async function fetchBirthday() {
                     </div>
                     <div class="form-group">
                         <label class="label" for="birthday">Birthday</label>
-                        <input type="date" class="form-control" id="birthdayId" name="birthday-date">
+                        <input type="date" class="form-control" id="birthdayId" name="birthday-date" value="${date}" max="${formatDate}">
                     </div>
                     <div class="form-group">
                         <label class="label" for="url">Your avatar image</label>
@@ -274,6 +313,7 @@ async function fetchBirthday() {
           generatedBirthday(editIdPopup);
           // resolve(e.target.displayList(editIdPopup));
           destroyPopup(formPopup);
+          document.body.style.overflow = "auto";
           // birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
           // updateLocalStorage();
         },
@@ -283,6 +323,7 @@ async function fetchBirthday() {
       // open form
       document.body.appendChild(formPopup);
       formPopup.classList.add("open");
+      document.body.style.overflow = "hidden";
       // await wait(50);
       // close form
       if (formPopup.close) {
@@ -291,6 +332,7 @@ async function fetchBirthday() {
           "click",
           (e) => {
             destroyPopup(formPopup);
+            document.body.style.overflow = "auto";
           },
           { once: true }
         );
@@ -316,11 +358,12 @@ async function fetchBirthday() {
     return new Promise(async function (resolve) {
       const openDiv = document.createElement("article");
       openDiv.classList.add("open");
+      document.body.style.overflow = "hidden";
       openDiv.insertAdjacentHTML(
         "afterbegin",
         `
                 <article class="delete-confirm" data-id="${openDiv.id}">
-                    <p>Are you sure you want to delete it!</p>
+                    <h2>Are you sure you want to delete it!</h2>
                     <button class="delete-button" name="deleteBtn" type="button" data-id="${openDiv.id}">Delete</button>
                     <button class="cancel-button cancel" name="cancel" type="button" data-id="${openDiv.id}">Cancel</button>
                 </article>
@@ -330,6 +373,7 @@ async function fetchBirthday() {
         const cancelBtn = e.target.closest("button.cancel-button");
         if (cancelBtn) {
           destroyPopup(openDiv);
+          document.body.style.overflow = "auto";
         }
       };
 
@@ -344,6 +388,7 @@ async function fetchBirthday() {
           destroyPopup(openDiv);
           // birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
           updateLocalStorage();
+          document.body.style.overflow = "auto";
         }
       });
 
@@ -351,6 +396,7 @@ async function fetchBirthday() {
       document.body.appendChild(openDiv);
       //await wait(20);
       openDiv.classList.add("popup");
+      document.body.style.overflow = "hidden";
     });
   };
 
@@ -374,8 +420,10 @@ async function fetchBirthday() {
   // Filter input
   const searchInput = (e) => {
     const filterInput = input.value;
-    const filterBirthday = data.filter((data) =>
-      data.lastName.toLowerCase().includes(filterInput.toLowerCase())
+    const filterBirthday = data.filter(
+      (data) =>
+        data.lastName.toLowerCase().includes(filterInput.toLowerCase()) ||
+        data.firstName.toLowerCase().includes(filterInput.toLowerCase())
     );
     const filterFromHtml = populateBirthday(filterBirthday);
     birthdayData.innerHTML = filterFromHtml;
@@ -401,7 +449,7 @@ async function fetchBirthday() {
   birthdayData.addEventListener("submit", addPeople);
   window.addEventListener("click", popupBirthday);
   window.addEventListener("click", deletedPopup);
-  // birthdayData.addEventListener('updatedBirthday', updateLocalStorage);
+  birthdayData.addEventListener('updatedBirthday', updateLocalStorage);
 
   initLocalStorage();
 }

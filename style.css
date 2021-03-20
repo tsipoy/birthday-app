@@ -18,6 +18,8 @@ h1 {
 }
 
 .wrapper {
+	padding-inline-end: 16px;
+    padding-inline-start: 16px;
 	margin: auto;
 	max-width: 900px;
 }
@@ -45,8 +47,13 @@ fieldset {
     align-items: baseline;
 }
 
+.form-group label {
+	padding-block-end: 8px;
+    padding-block-start: 16px;
+}
+
 .select-by-month {
-	padding-inline-end: 1rem;
+	padding-inline-end: 7rem;
 	font-size: 18px;
     line-height: 21px;
     color: #094067;
@@ -104,6 +111,12 @@ ul {
 	align-items: center;
 	padding-block-end: 23px;
 	padding-block-start: 22px;
+	padding-inline-end: 16px;
+}
+
+.birthday-lists img {
+	max-width: 100px;
+	height: 100px;
 }
 
 /* .name-birthday {
@@ -127,6 +140,10 @@ ul {
     padding-block-end: 16px;
     padding-inline-end: 18px;
     padding-inline-start: 18px;
+	margin-block-end: 24px;
+    margin-block-start: 24px;
+    margin-inline-end: 0;
+	margin-inline-start: 16px;
     border: none;
 }
 
@@ -142,12 +159,19 @@ b {
 	color: #EF4565;
 }
 
+.edit {
+	border: none;
+	background-color: #ffffff;
+}
+
 .icons-edit {
 	color: #5F6C7B;
+	font-size: 32px;
 }
 
 .icons-delete {
 	color: #EF4565;
+	font-size: 32px;
 }
 
 .icons-wrapper {
@@ -156,21 +180,24 @@ b {
     align-items: baseline;
 }
 
-/* .buttons-wrapper {
-	padding-inline-start: 127px;
-} */
+@media(min-width: 700px) {
+	.buttons-wrapper {
+		text-align: end;
+		padding-inline-end: 16px;
+	}
+
+	.icons-wrapper {
+		padding-inline-start: 50%;
+	}
+}
 
 img {
 	width: 100px;
 	border-radius: 50%;
 }
 
-.add-buttton {
-	margin: 24px;
-}
-
 .popup {
-	background: aliceblue;
+	background: rgba(240, 248, 255, 0.932);
 	position: fixed;
 	height: 100vh;
 	width: 100vw;
@@ -185,6 +212,7 @@ img {
 	padding: 1rem;
 }
 
+
 .popup fieldset {
 	display: flex;
 	flex-direction: column;
@@ -192,15 +220,39 @@ img {
 	background: var(--grey);
     padding-block-start: 2rem;
     padding-block-end: 2rem;
-	margin-inline-start: 10rem;
-	margin-inline-end: 10rem;
-	margin-block-start: 4rem;
-	margin-block-end: 4rem;
+	margin-block-end: 32px;
 	border-radius: 5px;
 	box-shadow: var(--box-shadow);
 	transition: all 0.2s;
 	--scale: 0.3;
 	transform: scale(var(--scale));
+}
+
+.delete-confirm {
+	text-align: center;
+}
+
+.new-birthday .form-group {
+	margin-inline-start: 8px;
+}
+
+.new-birthday .flex-row {
+	margin-inline-start: -67px;	
+}
+
+.new-birthday .flex-row .close-btn {
+	padding-inline-end: 14px;
+	padding-inline-start: 14px;
+}
+
+
+
+@media(min-width: 700px) {
+	.popup fieldset, 
+	.delete-confirm {
+		margin-inline-start: 15rem;
+		margin-inline-end: 15rem;
+	} 
 }
 
 .popup.open {
@@ -213,6 +265,15 @@ img {
 	--scale: 1;
     background-color: #ffffff;
 	border: 3px solid var(--pink);
+}
+
+.popup.open fieldset h2 {
+	margin-inline-start: -7px;
+}
+
+#birthdayId,
+#addBirthday {
+	padding-inline-end: 32px;
 }
 
 .delete-confirm {
@@ -234,6 +295,7 @@ td button.edit,
 .form-group {
 	display: flex;
 	flex-direction: column;
+	margin-inline-start: -48px;
 }
 
 .label {
@@ -249,10 +311,18 @@ td button.edit,
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	padding-block-start: 32px;
+	padding-inline-start: 32px;
 }
 
-.submitbtn {
-	font-size: 18px;
+.flex-row button {
+	margin-inline-start: 32px;
+}
+
+.submitbtn,
+.submit-btn,
+.delete-button {
+	font-size: 16px;
     line-height: 21px;
     background-color: rgb(243, 63, 93);
     color: white;
@@ -260,21 +330,28 @@ td button.edit,
     padding-block-end: 16px;
 	padding-inline-start: 18px;
     padding-inline-end: 18px;
-	margin-inline-end: 36px;
-    width: 231%;
     border: none;
 	border-radius: 5px;	
 }
 
 .close-btn {
-	font-size: 18px;
+	font-size: 16px;
     line-height: 21px;
     padding-block-start: 16px;
     padding-block-end: 16px;
-    width: 117%;
-	background-color: #ffffff;
+    padding-inline-end: 36px;
+    padding-inline-start: 36px;
+    background-color: #ffffff;
     border: 2px solid #5F6C7B;
     color: #5F6C7B;
-	box-sizing: border-box;
-	border-radius: 5px;	
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.delete-button {
+	padding: 16px;
+}
+
+.cancel-button {
+	padding: 16px;
 }
