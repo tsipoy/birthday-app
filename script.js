@@ -2,7 +2,7 @@ const endpoint =
   "https://gist.githubusercontent.com/Pinois/e1c72b75917985dc77f5c808e876b67f/raw/b17e08696906abeaac8bc260f57738eaa3f6abb1/birthdayPeople.json";
 const addButton = document.querySelector(".add-buttton");
 let birthdayData = document.querySelector("div.main-content");
-const select = document.querySelector(".select-by-month");
+const select = document.querySelector('[name="select"]');
 const input = document.querySelector('[name="filter"]');
 
 async function fetchBirthday() {
@@ -118,7 +118,7 @@ async function fetchBirthday() {
                   </span>
                 </div>
               </div>
-              <nav class="buttons-wrapper">
+              <na class="buttons-wrapper">
                 <p class="leftDay">In ${diff} days<br></p>
                 <ul class="icons-wrapper">
                   <li class="edit-btn">
@@ -132,7 +132,7 @@ async function fetchBirthday() {
                     </button>
                   </li>
                 </ul>
-              </nav>
+              </na>
             </div>
         `;
       })
@@ -179,6 +179,7 @@ async function fetchBirthday() {
       "afterbegin",
       `
             <fieldset class="new-birthday"> 
+            <button class="cross-btn" name="cross" type="button">X</button>
               <h2>New birthday</h2>
                 <div class="form-group">
                     <label for="addLastname" class="lastname-label">Lastname</label>
@@ -237,6 +238,7 @@ async function fetchBirthday() {
     // close form
     if (addFormPopup.close) {
       const closeAddBtn = addFormPopup.close;
+      const crossBtn = addFormPopup.cross;
       closeAddBtn.addEventListener(
         "click",
         (e) => {
@@ -245,6 +247,15 @@ async function fetchBirthday() {
         },
         { once: true }
       );
+      crossBtn.addEventListener(
+        "click",
+        (e) => {
+          destroyPopup(addFormPopup);
+          document.body.style.overflow = "auto";
+        },
+        { once: true }
+      );
+
     }
   };
 
@@ -276,6 +287,7 @@ async function fetchBirthday() {
         "afterbegin",
         `
                 <fieldset> 
+                    <button class="cross-btn" name="cross" type="button">X</button>
                     <h2>Edit ${editIdPopup.lastName} ${editIdPopup.firstName}</h2>
                     <div class="form-group">
                         <label class="label" for="lastname">Lastname</label>
@@ -328,7 +340,16 @@ async function fetchBirthday() {
       // close form
       if (formPopup.close) {
         const closeBtn = formPopup.close;
+        const crossBtn = formPopup.cross;
         closeBtn.addEventListener(
+          "click",
+          (e) => {
+            destroyPopup(formPopup);
+            document.body.style.overflow = "auto";
+          },
+          { once: true }
+        );
+        crossBtn.addEventListener(
           "click",
           (e) => {
             destroyPopup(formPopup);
@@ -418,38 +439,61 @@ async function fetchBirthday() {
   };
 
   // Filter input
-  const searchInput = (e) => {
-    const filterInput = input.value;
-    const filterBirthday = data.filter(
-      (data) =>
-        data.lastName.toLowerCase().includes(filterInput.toLowerCase()) ||
-        data.firstName.toLowerCase().includes(filterInput.toLowerCase())
-    );
-    const filterFromHtml = populateBirthday(filterBirthday);
-    birthdayData.innerHTML = filterFromHtml;
-    if (filterBirthday.length < 0) {
-      console.log("Nobody matches that filter options.");
-      birthdayData = `<p><i>Nobody matches that filter options.</p>`;
-    }
-  };
+  // const searchInput = (e) => {
+  //   const filterInput = input.value;
+  //   const filterBirthday = data.filter(
+  //     (data) =>
+  //       data.lastName.toLowerCase().includes(filterInput.toLowerCase()) ||
+  //       data.firstName.toLowerCase().includes(filterInput.toLowerCase())
+  //   );
+  //   const filterFromHtml = populateBirthday(filterBirthday);
+  //   birthdayData.innerHTML = filterFromHtml;
+  //   if (filterBirthday.length < 0) {
+  //     console.log("Nobody matches that filter options.");
+  //     birthdayData = `<p><i>Nobody matches that filter options.</p>`;
+  //   }
+  // };
 
-  select.addEventListener("change", function (e) {
-    let filteredArr = data.filter((item) => {
-      let date = new Date(item.birthday);
-      let monthName = date.toLocaleString("default", { month: "long" });
+  // select.addEventListener("change", function (e) {
+  //   let filteredArr = data.filter((item) => {
+  //     let date = new Date(item.birthday);
+  //     let monthName = date.toLocaleString("default", { month: "long" });
 
-      return monthName == e.target.value;
+  //     return monthName == e.target.value;
+  //   });
+
+  //   let month = populateBirthday(filteredArr);
+  //   birthdayData.innerHTML = month;
+  // });
+
+  function filters() {
+    const filteredByMonth = select.value.toLowerCase().trim();
+    const filteredByName = input.value.toLowerCase().trim();
+    const searchingByName = data.filter((item) => {
+      return (
+        item.firstName.toLowerCase().includes(filteredByName) ||
+        item.lastName.toLowerCase().includes(filteredByName)
+      );
     });
 
-    let month = populateBirthday(filteredArr);
-    birthdayData.innerHTML = month;
-  });
+    const searchingPeopleByNameAndMonth =
+      filteredByMonth !== "empty"
+        ? searchingByName.filter((item) => {
+            let date = new Date(item.birthday);
+            let monthName = date.toLocaleString("default", { month: "long" });
+            return monthName.toLowerCase().includes(filteredByMonth);
+          })
+        : searchingByName;
+    let filtering = populateBirthday(searchingPeopleByNameAndMonth);
+    birthdayData.innerHTML = filtering;
+  }
 
-  input.addEventListener("input", searchInput);
+  input.addEventListener("keyup", filters);
+  select.addEventListener("change", filters);
   birthdayData.addEventListener("submit", addPeople);
   window.addEventListener("click", popupBirthday);
   window.addEventListener("click", deletedPopup);
-  birthdayData.addEventListener('updatedBirthday', updateLocalStorage);
+  birthdayData.addEventListener("updatedBirthday", updateLocalStorage);
 
   initLocalStorage();
 }

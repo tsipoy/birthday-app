@@ -14,23 +14,18 @@ h1 {
 	line-height: 76px;
 	text-align: start;
 	margin-block-start: 0;
-    padding-block-start: 63px;
+    padding-block-start: 52px;
 }
 
 .wrapper {
 	padding-inline-end: 16px;
     padding-inline-start: 16px;
 	margin: auto;
-	max-width: 900px;
+	max-width: 789px;
 }
 
 .header {
-	padding-block-end: 3rem;
-}
-
-
-fieldset {
-	border: none;
+	padding-block-end: 26px;
 }
 
 .search-header {
@@ -39,12 +34,16 @@ fieldset {
 	justify-content: space-between;
 	flex-wrap: wrap;
 	margin-inline-start: -13px;
+	margin-block-start: -24px;
 }
 
 fieldset {
+	border: none;
 	display: flex;
     flex-direction: column;
     align-items: baseline;
+	margin-inline-end: 0;
+    margin-inline-start: 0;
 }
 
 .form-group label {
@@ -53,10 +52,26 @@ fieldset {
 }
 
 .select-by-month {
-	padding-inline-end: 4rem;
 	font-size: 18px;
     line-height: 21px;
     color: #094067;
+	border-radius: 5px;
+	padding-block-start: 15px;
+    padding-block-end: 14px;
+	padding-inline-end: 109px;
+    padding-inline-start: 20px;
+	border: none;
+}
+
+.select-by-month {
+	-webkit-appearance: none;
+}
+
+.select-by-month::before {
+	/* position: absolute; */
+	content: "A";
+	/* right: 20px;
+	font-size: 32px; */
 }
 
 .lastname-label,
@@ -71,13 +86,13 @@ fieldset {
     color: #094067;
 }
 
-input, select {
+input {
 	border: none;
 	border-radius: 5px;
-	padding-block-start: 10px;
-	padding-block-end: 10px;
-	padding-inline-start: 16px;
-	padding-inline-start: 16px;
+	padding-block-start: 15px;
+    padding-block-end: 14px;
+    padding-inline-start: 20px;
+	padding-inline-end: 26px;
 }
 
 
@@ -108,12 +123,11 @@ ul {
 	border-radius: 5px;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-	padding-inline-start: 43px;
 	align-items: center;
 	padding-block-end: 23px;
 	padding-block-start: 22px;
 	padding-inline-end: 25px;
-	padding-inline-end: 43px;
+	padding-inline-start: 43px;
 }
 
 .birthday-lists img {
@@ -144,12 +158,12 @@ ul {
     background-color: rgb(243, 63, 93);
     color: white;
     border-radius: 5px;
-    padding-block-start: 16px;
-    padding-block-end: 16px;
-    padding-inline-end: 18px;
-    padding-inline-start: 18px;
+    padding-block-start: 15px;
+    padding-block-end: 14px;
+    padding-inline-end: 11px;
+    padding-inline-start: 19px;
 	margin-block-end: 24px;
-    margin-block-start: 24px;
+    margin-block-start: 38px;
     margin-inline-end: 0;
 	margin-inline-start: 16px;
     border: none;
@@ -191,7 +205,6 @@ b {
 @media(min-width: 700px) {
 	.buttons-wrapper {
 		text-align: end;
-		padding-inline-end: 16px;
 	}
 
 	.icons-wrapper {
@@ -266,6 +279,7 @@ img {
 .popup.open {
 	--opacity: 1;
 	pointer-events: all;
+	overflow-x: auto;
 }
 
 .popup.open fieldset,
@@ -334,9 +348,9 @@ td button.edit,
     line-height: 21px;
     background-color: rgb(243, 63, 93);
     color: white;
-    padding-block-start: 16px;
-    padding-block-end: 16px;
-	padding-inline-start: 18px;
+    padding-block-start: 15px;
+    padding-block-end: 14px;
+	padding-inline-start: 20px;
     padding-inline-end: 18px;
     border: none;
 	border-radius: 5px;	
