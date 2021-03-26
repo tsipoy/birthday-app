@@ -179,7 +179,9 @@ async function fetchBirthday() {
       "afterbegin",
       `
             <fieldset class="new-birthday"> 
-            <button class="cross-btn" name="cross" type="button">X</button>
+            <button class="cross-btn" name="cross" type="button">
+              <i class="ri-close-fill"></i>
+            </button>
               <h2>New birthday</h2>
                 <div class="form-group">
                     <label for="addLastname" class="lastname-label">Lastname</label>
@@ -287,7 +289,9 @@ async function fetchBirthday() {
         "afterbegin",
         `
                 <fieldset> 
-                    <button class="cross-btn" name="cross" type="button">X</button>
+                    <button class="cross-btn" name="cross" type="button">
+                      <i class="ri-close-fill"></i>
+                    </button>
                     <h2>Edit ${editIdPopup.lastName} ${editIdPopup.firstName}</h2>
                     <div class="form-group">
                         <label class="label" for="lastname">Lastname</label>
