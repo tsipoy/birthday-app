@@ -36,7 +36,6 @@ async function fetchBirthday() {
       return birthdayA - birthdayB;
     });
 
-    console.log(sortedPeople);
     return sortedPeople
       .map((person) => {
         const daySuffix = function (df) {
@@ -97,7 +96,7 @@ async function fetchBirthday() {
           birthdayDate.getDate()
         );
         let diff = Math.ceil((birth.getTime() - today.getTime()) / oneDay);
-
+        
         return `
             <div data-id="${person.id}" class="birthday-lists">
               <img src="${person.picture}" alt="${
@@ -113,8 +112,7 @@ async function fetchBirthday() {
         }</li>
                 </ul>
                 <div>
-                  <span class="birthday">Turns <b>${year}</b> on ${month} ${birthDay}
-                  <sup>${daySuffix(birthDay)}</sup> 
+                  <span class="birthday">Turns <b>${year}</b> on ${month} ${birthDay}<sup>${daySuffix(birthDay)}</sup> 
                   </span>
                 </div>
               </div>
@@ -257,7 +255,6 @@ async function fetchBirthday() {
         },
         { once: true }
       );
-
     }
   };
 
@@ -376,9 +373,7 @@ async function fetchBirthday() {
   };
 
   const deletedData = (deletedId) => {
-    const deletePeople = data.find(
-      (person) => person.id !== deletedId || person.id != deletedId
-    );
+    data.find((person) => person.id !== deletedId || person.id != deletedId);
 
     return new Promise(async function (resolve) {
       const openDiv = document.createElement("article");
@@ -387,37 +382,39 @@ async function fetchBirthday() {
       openDiv.insertAdjacentHTML(
         "afterbegin",
         `
-                <article class="delete-confirm" data-id="${openDiv.id}">
-                    <h2>Are you sure you want to delete it!</h2>
-                    <button class="delete-button" name="deleteBtn" type="button" data-id="${openDiv.id}">Delete</button>
-                    <button class="cancel-button cancel" name="cancel" type="button" data-id="${openDiv.id}">Cancel</button>
-                </article>
-            `
+          <article class="delete-confirm" data-id="${openDiv.id}">
+              <h2>Are you sure you want to delete it!</h2>
+              <div>
+                <button class="delete-button deleteBtn" name="deleteBtn" type="button" data-id="${openDiv.id}">Delete</button>
+                <button class="cancel-button cancel" name="cancel" type="button" data-id="${openDiv.id}">Cancel</button>
+              </div>
+          </article>
+        `
       );
-      const confirmDelete = (e) => {
-        const cancelBtn = e.target.closest("button.cancel-button");
-        if (cancelBtn) {
-          destroyPopup(openDiv);
-          document.body.style.overflow = "auto";
-        }
-      };
 
-      openDiv.addEventListener("click", () => {
-        const deletePersonBirthday = data.filter(
-          (person) => person.id != deletedId
-        );
-        const deleteConfirm = document.querySelector("button.delete-button");
+      openDiv.addEventListener("click", (e) => {
+        const deleteConfirm = e.target.closest("button.delete-button");
+        const cancelDelete = e.target.closest("button.cancel-button.cancel");
+        openDiv.classList.add("open");
         if (deleteConfirm) {
+          const deletePersonBirthday = data.filter(
+            (person) => person.id != deletedId
+          );
           data = deletePersonBirthday;
           generatedBirthday(data);
           destroyPopup(openDiv);
-          // birthdayData.dispatchEvent(new CustomEvent('updatedBirthday'));
+          birthdayData.dispatchEvent(new CustomEvent("updatedBirthday"));
           updateLocalStorage();
+          document.body.style.overflow = "auto";
+        }
+
+        if (cancelDelete) {
+          destroyPopup(openDiv);
           document.body.style.overflow = "auto";
         }
       });
 
-      openDiv.addEventListener("click", confirmDelete);
+      // openDiv.addEventListener("click", confirmDelete);
       document.body.appendChild(openDiv);
       //await wait(20);
       openDiv.classList.add("popup");

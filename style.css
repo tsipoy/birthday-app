@@ -67,11 +67,11 @@ fieldset {
 	-webkit-appearance: none;
 }
 
-.select-by-month::before {
-	/* position: absolute; */
-	content: "A";
-	/* right: 20px;
-	font-size: 32px; */
+.select-by-month {
+	background-image: url('./dist/select-icon.svg');
+	background-repeat: no-repeat;
+	background-position-x: 91%;
+	background-position-y: 50%;
 }
 
 .lastname-label,
@@ -135,24 +135,45 @@ ul {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 	align-items: center;
-	padding-block-end: 23px;
-	padding-block-start: 22px;
+	padding-block-end: 9px;
+    padding-block-start: 11px;
 	padding-inline-end: 25px;
 	padding-inline-start: 43px;
+	padding-block-end: 9px;
+    padding-block-start: 29px;
+}
+
+@media(min-width: 700px) {
+	.birthday-lists {
+		/* background-color: #ffffff;
+		margin-block-end: 31px;
+		border-radius: 5px;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		align-items: center;
+		padding-block-end: 9px; */
+		padding-block-start: 11px;
+		/* padding-inline-end: 25px;
+		padding-inline-start: 43px; */
+}
 }
 
 .birthday-lists img {
-	max-width: 100px;
-	height: 100px;
+	max-width: 92px;
+    height: 94px;
 }
 
 .name-birthday {
 	margin-block-end: 25px;
 }
 
+.name-birthday div {
+	margin-block-start: -9px;
+}
+
 @media(min-width: 700px) {
 	.name-birthday {
-		margin-inline-start: -109px;
+		margin-inline-start: -103px;
 	}	
 }
 
@@ -161,6 +182,7 @@ ul {
 	font-size: 24px;
     line-height: 28px;
     color: #5F6C7B;
+	margin-block-start: 0;
 }
 
 .add-buttton {
@@ -220,6 +242,7 @@ b {
 
 	.icons-wrapper {
 		padding-inline-start: 66%;
+		padding-block-start: 15px;
 	}
 }
 
@@ -251,9 +274,7 @@ img {
 	align-items: center;
 	background: var(--grey);
     padding-block-start: 83px;
-    padding-block-end: 186px;
-	margin-block-end: 32px;
-	border-radius: 5px;
+    padding-block-end: 86px;
 	box-shadow: var(--box-shadow);
 	transition: all 0.2s;
 	--scale: 0.3;
@@ -262,29 +283,60 @@ img {
 
 .delete-confirm {
 	text-align: center;
+	margin-inline-end: 37px;
 }
 
-.new-birthday .form-group {
-	margin-inline-start: 8px;
+.delete-confirm div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
+
+/* .new-birthday .form-group {
+	margin-inline-start: 8px;
+} */
 
 .new-birthday .flex-row {
-	margin-inline-start: -67px;	
+	display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-inline-start: -181px;	
 }
 
 .new-birthday .flex-row .close-btn {
-	padding-inline-end: 14px;
-	padding-inline-start: 14px;
+	/* padding-inline-end: 14px;
+	padding-inline-start: 14px; */
+	padding-inline-start: 32px;
+    padding-inline-end: 26px;
 }
 
-
+.new-birthday .close-btn {
+	margin-block-start: 22px;
+}
 
 @media(min-width: 700px) {
+	.new-birthday .flex-row {
+		flex-direction: row;
+		margin-inline-start: -60px;
+	}
+
 	.popup fieldset, 
 	.delete-confirm {
 		margin-inline-start: 15rem;
 		margin-inline-end: 15rem;
 	} 
+}
+
+@media (max-width: 800px) {
+	.popup fieldset, .delete-confirm {
+		margin-inline-start: 1rem;
+		margin-inline-end: 3rem;
+		padding-inline-start: 63px;
+	}
+
+	.flex-row {
+		margin-inline-start: -50px;
+	}
 }
 
 .popup.open {
@@ -302,7 +354,11 @@ img {
 }
 
 .popup.open fieldset h2 {
-	margin-inline-start: -44px;
+	margin-inline-start: -47px;
+}
+
+.new-birthday h2 {
+	margin-inline-start: -102px;
 }
 
 #birthdayId,
@@ -345,12 +401,17 @@ td button.edit,
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding-block-start: 32px;
-	padding-inline-start: 32px;
+	flex-wrap: wrap;
 }
 
+@media(min-width: 700px) {
+	.flex-row {
+		margin-inline-start: 32px;
+	}	
+}
 .flex-row button {
-	margin-inline-start: 32px;
+	margin-inline-start: 20px;
+	margin-block-start: 49px;
 }
 
 .submitbtn,
@@ -362,8 +423,8 @@ td button.edit,
     color: white;
     padding-block-start: 15px;
     padding-block-end: 14px;
-	padding-inline-start: 20px;
-    padding-inline-end: 18px;
+	padding-inline-start: 32px;
+    padding-inline-end: 26px;
     border: none;
 	border-radius: 5px;	
 }
@@ -371,10 +432,10 @@ td button.edit,
 .close-btn {
 	font-size: 16px;
     line-height: 21px;
-    padding-block-start: 16px;
-    padding-block-end: 16px;
-    padding-inline-end: 36px;
-    padding-inline-start: 36px;
+	padding-block-start: 14px;
+    padding-block-end: 15px;
+    padding-inline-end: 50px;
+    padding-inline-start: 48px;
     background-color: #ffffff;
     border: 2px solid #5F6C7B;
     color: #5F6C7B;
@@ -388,4 +449,18 @@ td button.edit,
 
 .cancel-button {
 	padding: 16px;
+	background-color: #ffffff;
+    border: 2px solid #5F6C7B;
+    border-radius: 5px;
 }
+
+
+/* icons {
+	background-color: #EF4565;
+	background-color: #ffffff;
+    content: "\ebf8";
+    padding-block-end: 4px;
+    padding-block-start: 1px;
+    padding-inline-end: 5px;
+    padding-inline-start: 5px;	
+} */
