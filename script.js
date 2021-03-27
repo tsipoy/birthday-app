@@ -96,7 +96,7 @@ async function fetchBirthday() {
           birthdayDate.getDate()
         );
         let diff = Math.ceil((birth.getTime() - today.getTime()) / oneDay);
-        
+
         return `
             <div data-id="${person.id}" class="birthday-lists">
               <img src="${person.picture}" alt="${
@@ -383,11 +383,14 @@ async function fetchBirthday() {
         "afterbegin",
         `
           <article class="delete-confirm" data-id="${openDiv.id}">
-              <h2>Are you sure you want to delete it!</h2>
-              <div>
-                <button class="delete-button deleteBtn" name="deleteBtn" type="button" data-id="${openDiv.id}">Delete</button>
-                <button class="cancel-button cancel" name="cancel" type="button" data-id="${openDiv.id}">Cancel</button>
-              </div>
+            <button class="cross-btn" name="cross" type="button">
+              <i class="ri-close-fill"></i>
+            </button>
+            <h2>Are you sure you want to delete it!</h2>
+            <div>
+              <button class="delete-button deleteBtn" name="deleteBtn" type="button" data-id="${openDiv.id}">Delete</button>
+              <button class="cancel-button cancel" name="cancel" type="button" data-id="${openDiv.id}">Cancel</button>
+            </div>
           </article>
         `
       );
@@ -395,6 +398,7 @@ async function fetchBirthday() {
       openDiv.addEventListener("click", (e) => {
         const deleteConfirm = e.target.closest("button.delete-button");
         const cancelDelete = e.target.closest("button.cancel-button.cancel");
+        const crossDelete = e.target.closest(".cross-btn");
         openDiv.classList.add("open");
         if (deleteConfirm) {
           const deletePersonBirthday = data.filter(
@@ -408,7 +412,12 @@ async function fetchBirthday() {
           document.body.style.overflow = "auto";
         }
 
-        if (cancelDelete) {
+        if(cancelDelete) {
+          destroyPopup(openDiv);
+          document.body.style.overflow = "auto";
+        }
+        
+        if(crossDelete) {
           destroyPopup(openDiv);
           document.body.style.overflow = "auto";
         }

@@ -138,24 +138,15 @@ ul {
 	padding-block-end: 9px;
     padding-block-start: 11px;
 	padding-inline-end: 25px;
-	padding-inline-start: 43px;
-	padding-block-end: 9px;
+	padding-inline-start: 30px;
     padding-block-start: 29px;
 }
 
 @media(min-width: 700px) {
 	.birthday-lists {
-		/* background-color: #ffffff;
-		margin-block-end: 31px;
-		border-radius: 5px;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-		align-items: center;
-		padding-block-end: 9px; */
 		padding-block-start: 11px;
-		/* padding-inline-end: 25px;
-		padding-inline-start: 43px; */
-}
+		padding-inline-start: 43px;
+	}
 }
 
 .birthday-lists img {
@@ -318,6 +309,10 @@ img {
 	.new-birthday .flex-row {
 		flex-direction: row;
 		margin-inline-start: -60px;
+	}
+
+	.new-birthday .close-btn {
+		margin-block-start: auto;
 	}
 
 	.popup fieldset, 
