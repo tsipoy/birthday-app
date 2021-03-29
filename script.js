@@ -58,7 +58,7 @@ async function fetchBirthday() {
           const ageDate = new Date(msDate);
           return Math.abs(ageDate.getFullYear() - 1970) + 1;
         };
-        let year = calculateAge(new Date(person.birthday));
+        let year = calculateAge(new Date(person.birthday)) - 1;
 
         let date = new Date(person.birthday);
 
@@ -116,7 +116,7 @@ async function fetchBirthday() {
                   </span>
                 </div>
               </div>
-              <na class="buttons-wrapper">
+              <nav class="buttons-wrapper">
                 <p class="leftDay">In ${diff} days<br></p>
                 <ul class="icons-wrapper">
                   <li class="edit-btn">
@@ -130,7 +130,7 @@ async function fetchBirthday() {
                     </button>
                   </li>
                 </ul>
-              </na>
+              </nav>
             </div>
         `;
       })
@@ -180,7 +180,7 @@ async function fetchBirthday() {
             <button class="cross-btn" name="cross" type="button">
               <i class="ri-close-fill"></i>
             </button>
-              <h2>New birthday</h2>
+              <h2 class="add-title">New birthday</h2>
                 <div class="form-group">
                     <label for="addLastname" class="lastname-label">Lastname</label>
                     <input type="text" class="form-control" placeholder="Your lastname" name="lastName" id="addLastname">
@@ -285,11 +285,11 @@ async function fetchBirthday() {
       formPopup.insertAdjacentHTML(
         "afterbegin",
         `
-                <fieldset> 
+                <fieldset class="edit-people-birthday"> 
                     <button class="cross-btn" name="cross" type="button">
                       <i class="ri-close-fill"></i>
                     </button>
-                    <h2>Edit ${editIdPopup.lastName} ${editIdPopup.firstName}</h2>
+                    <h2 class="edit-title">Edit ${editIdPopup.lastName} ${editIdPopup.firstName}</h2>
                     <div class="form-group">
                         <label class="label" for="lastname">Lastname</label>
                         <input type="text" class="form-control" id="lastnameId" value="${editIdPopup.lastName}">
@@ -302,12 +302,8 @@ async function fetchBirthday() {
                         <label class="label" for="birthday">Birthday</label>
                         <input type="date" class="form-control" id="birthdayId" name="birthday-date" value="${date}" max="${formatDate}">
                     </div>
-                    <div class="form-group">
-                        <label class="label" for="url">Your avatar image</label>
-                        <input type="url" class="form-control" id="urlId" value="${editIdPopup.picture}">
-                    </div>
                     <div class="d-flex flex-row">
-                        <button type="submit" class="submitbtn" name="submit">Save change</button>
+                        <button type="submit" class="submitbtn" name="submit">Save changes</button>
                         <button class="close-btn" name="close" type="button">Cancel</button>
                     </div>
                 </fiedset>
@@ -322,7 +318,6 @@ async function fetchBirthday() {
           editIdPopup.lastName = formPopup.lastnameId.value;
           editIdPopup.firstName = formPopup.firstnameId.value;
           editIdPopup.birthday = formPopup.birthdayId.value;
-          editIdPopup.picture = formPopup.urlId.value;
           generatedBirthday(editIdPopup);
           // resolve(e.target.displayList(editIdPopup));
           destroyPopup(formPopup);
@@ -434,9 +429,8 @@ async function fetchBirthday() {
   const initLocalStorage = () => {
     const stringForm = localStorage.getItem("data");
     const listItems = JSON.parse(stringForm);
-
     if (listItems) {
-      peopleData = listItems;
+      peopleData = data = listItems;
     } else {
       peopleData = data;
     }
