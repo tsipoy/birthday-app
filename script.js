@@ -58,8 +58,7 @@ async function fetchBirthday() {
           const ageDate = new Date(msDate);
           return Math.abs(ageDate.getFullYear() - 1970) + 1;
         };
-        let year = calculateAge(new Date(person.birthday)) - 1;
-
+        let year = calculateAge(new Date(person.birthday));
         let date = new Date(person.birthday);
 
         let month = date.toLocaleString("default", { month: "long" });
