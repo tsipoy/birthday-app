@@ -286,10 +286,6 @@ img {
 	justify-content: space-evenly;
 }
 
-/* .new-birthday .form-group {
-	margin-inline-start: 8px;
-} */
-
 .new-birthday .flex-row {
 	display: flex;
     flex-direction: column;
@@ -299,8 +295,6 @@ img {
 }
 
 .new-birthday .flex-row .close-btn {
-	/* padding-inline-end: 14px;
-	padding-inline-start: 14px; */
 	padding-inline-start: 32px;
     padding-inline-end: 26px;
 }
@@ -471,14 +465,3 @@ td button.edit,
     border: 2px solid #5F6C7B;
     border-radius: 5px;
 }
-
-
-/* icons {
-	background-color: #EF4565;
-	background-color: #ffffff;
-    content: "\ebf8";
-    padding-block-end: 4px;
-    padding-block-start: 1px;
-    padding-inline-end: 5px;
-    padding-inline-start: 5px;	
-} */
