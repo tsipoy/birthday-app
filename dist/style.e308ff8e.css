@@ -141,13 +141,6 @@ ul {
     padding-block-start: 29px;
 }
 
-@media(min-width: 700px) {
-	.birthday-lists {
-		padding-block-start: 1px;
-		padding-inline-start: 43px;
-	}
-}
-
 .birthday-lists img {
 	max-width: 92px;
     height: 94px;
@@ -160,12 +153,6 @@ ul {
 
 .name-birthday div {
 	margin-block-start: -9px;
-}
-
-@media(min-width: 700px) {
-	.name-birthday {
-		margin-inline-start: -103px;
-	}	
 }
 
 .birthday, 
@@ -229,17 +216,6 @@ b {
     align-items: baseline;
 }
 
-@media(min-width: 700px) {
-	.buttons-wrapper {
-		text-align: end;
-	}
-
-	.icons-wrapper {
-		padding-inline-start: 66%;
-		padding-block-start: 20px;
-	}
-}
-
 img {
 	width: 100px;
 	border-radius: 50%;
@@ -294,48 +270,32 @@ img {
 	padding-block-start: 49px;	
 }
 
-.new-birthday .flex-row .close-btn {
-	padding-inline-start: 32px;
+.new-birthday .submit-btn {
+	font-size: 16px;
+    line-height: 21px;
+    background-color: rgb(243, 63, 93);
+    color: white;
+    padding-inline-start: 32px;
     padding-inline-end: 26px;
+    padding-block-end: 15px;
+    padding-block-start: 14px;
+    border: none;
+    border-radius: 5px;
 }
 
-.new-birthday .close-btn {
-	margin-block-start: 22px;
+.new-birthday .flex-row .close-btn {
+	font-size: 16px;
+    line-height: 21px;
+	background-color: #ffffff;
+    border: 2px solid #5F6C7B;
+    color: #5F6C7B;
+	padding-inline-start: 27px;
+    padding-inline-end: 24px;
+    padding-block-end: 15px;
+    padding-block-start: 14px;
+    border-radius: 5px;
 }
 
-@media(min-width: 700px) {
-	.new-birthday .flex-row {
-		flex-direction: row;
-		margin-inline-start: -60px;
-	}
-
-	.new-birthday .close-btn {
-		margin-block-start: auto;
-	}
-
-	.popup fieldset, 
-	.delete-confirm {
-		margin-inline-start: 15rem;
-		margin-inline-end: 15rem;
-	} 
-}
-
-@media (max-width: 900px) {
-	.popup fieldset, .delete-confirm {
-		margin-inline-start: 1rem;
-		margin-inline-end: 3rem;
-		padding-inline-start: 63px;
-	}
-
-	.flex-row {
-		margin-inline-start: -50px;
-	}
-
-	.edit-people-birthday .flex-row {
-		margin-inline-start: -27px;
-		margin-block-start: 49px;
-	}
-}
 
 .popup.open {
 	--opacity: 1;
@@ -357,20 +317,6 @@ fieldset h2 {
 
 .new-birthday .add-title {
 	margin-inline-start: -105px;
-}
-
-@media(min-width: 700px) {
-	.popup.open fieldset h2 {
-		font-size: 34px;
-	}
-	
-	.edit-people-birthday .edit-title {
-		margin-inline-start: 39px;
-	} 
-	
-	.new-birthday .add-title {
-		margin-inline-start: -40px;
-	}
 }
 
 #birthdayId,
@@ -416,18 +362,12 @@ td button.edit,
 	flex-wrap: wrap;
 }
 
-@media(min-width: 700px) {
-	.flex-row {
-		margin-inline-start: 46px;
-	}	
-}
 .flex-row button {
 	margin-inline-start: 20px;
 	margin-block-start: 32px;
 }
 
 .submitbtn,
-.submit-btn,
 .delete-button {
 	font-size: 16px;
     line-height: 21px;
@@ -466,5 +406,69 @@ td button.edit,
     border-radius: 5px;
 }
 
+
+@media(min-width: 700px) {
+	.birthday-lists {
+		padding-block-start: 1px;
+		padding-inline-start: 43px;
+	}
+
+	.name-birthday {
+		margin-inline-start: -103px;
+	}
+
+	.buttons-wrapper {
+		text-align: end;
+	}
+	
+	.icons-wrapper {
+		padding-inline-start: 66%;
+		padding-block-start: 20px;
+	}
+
+	.new-birthday .flex-row {
+		flex-direction: row;
+		margin-inline-start: -60px;
+	}
+
+	
+	.popup fieldset, 
+	.delete-confirm {
+		margin-inline-start: 15rem;
+		margin-inline-end: 15rem;
+	} 
+
+	.popup.open fieldset h2 {
+		font-size: 34px;
+	}
+	
+	.edit-people-birthday .edit-title {
+		margin-inline-start: 39px;
+	} 
+	
+	.new-birthday .add-title {
+		margin-inline-start: -40px;
+	}
+	.flex-row {
+		margin-inline-start: 46px;
+	}	
+}
+
+@media (max-width: 900px) {
+	.popup fieldset, .delete-confirm {
+		margin-inline-start: 1rem;
+		margin-inline-end: 3rem;
+		padding-inline-start: 63px;
+	}
+
+	.flex-row {
+		margin-inline-start: -50px;
+	}
+
+	.edit-people-birthday .flex-row {
+		margin-inline-start: -27px;
+		margin-block-start: 49px;
+	}
+}
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */
