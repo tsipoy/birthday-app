@@ -259,8 +259,14 @@ img {
 .delete-confirm div {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
+	justify-content: center;
 }
+
+.delete-confirm div button {
+	margin-inline-end: 32px;
+}
+
+
 
 .new-birthday .flex-row {
 	display: flex;
