@@ -58,8 +58,8 @@ fieldset {
 	border-radius: 5px;
 	padding-block-start: 15px;
     padding-block-end: 14px;
-	padding-inline-end: 109px;
-    padding-inline-start: 20px;
+	padding-inline-end: 123px;
+    padding-inline-start: 23px;
 	border: none;
 }
 
@@ -175,8 +175,8 @@ ul {
     border-radius: 5px;
     padding-block-start: 15px;
     padding-block-end: 14px;
-    padding-inline-end: 11px;
-    padding-inline-start: 19px;
+	padding-inline-end: 23px;
+    padding-inline-start: 22px;
 	margin-block-end: 24px;
     margin-block-start: 38px;
     margin-inline-end: 0;
