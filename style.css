@@ -77,6 +77,8 @@ fieldset {
 .lastname-label,
 .select {
 	padding-block-end: 13px;
+	font-size: 18px;
+	line-height: 21px;
 }
 
 .filter-input,
