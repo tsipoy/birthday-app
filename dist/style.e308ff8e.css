@@ -459,12 +459,6 @@ td button.edit,
 }
 
 @media (max-width: 900px) {
-  /* .search-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-	flex-wrap: wrap;
-  } */
   .popup fieldset,
   .delete-confirm {
     margin-inline-start: 1rem;
