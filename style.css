@@ -1,480 +1,483 @@
 body {
-	margin: 0;
-	background: #D8EEFE;
+  margin: 0;
+  background: #d8eefe;
 }
 
 html {
-	font-family: 'Rubik', sans-serif;
-	color:  #094067;
+  font-family: "Rubik", sans-serif;
+  color: #094067;
 }
 
 h1 {
-	color: #094067;
-	font-size: 64px;
-	line-height: 76px;
-	text-align: start;
-	margin-block-start: 0;
-    padding-block-start: 52px;
+  color: #094067;
+  font-size: 64px;
+  line-height: 76px;
+  text-align: start;
+  margin-block-start: 0;
+  padding-block-start: 52px;
+}
+
+button {
+  cursor: pointer;
 }
 
 .wrapper {
-	padding-inline-end: 16px;
-    padding-inline-start: 16px;
-	margin: auto;
-	max-width: 789px;
+  padding-inline-end: 16px;
+  padding-inline-start: 16px;
+  margin: auto;
+  max-width: 789px;
 }
 
 .header {
-	padding-block-end: 26px;
+  padding-block-end: 26px;
 }
 
 .search-header {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	margin-inline-start: -13px;
-	margin-block-start: -24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-inline-start: -13px;
+  margin-block-start: -24px;
 }
 
 fieldset {
-	border: none;
-	display: flex;
-    flex-direction: column;
-    align-items: baseline;
-	margin-inline-end: 0;
-    margin-inline-start: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
 }
 
 .form-group label {
-	padding-block-end: 8px;
-    padding-block-start: 16px;
+  padding-block-end: 8px;
+  padding-block-start: 16px;
 }
 
 .select-by-month {
-	font-size: 18px;
-    line-height: 21px;
-    color: #094067;
-	border-radius: 5px;
-	padding-block-start: 15px;
-    padding-block-end: 14px;
-	padding-inline-end: 123px;
-    padding-inline-start: 23px;
-	border: none;
+  font-size: 18px;
+  line-height: 21px;
+  color: #094067;
+  border-radius: 5px;
+  padding-block-start: 15px;
+  padding-block-end: 14px;
+  padding-inline-end: 123px;
+  padding-inline-start: 23px;
+  border: none;
 }
 
 .select-by-month {
-	-webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 .select-by-month {
-	background-image: url('./dist/select-icon.svg');
-	background-repeat: no-repeat;
-	background-position-x: 91%;
-	background-position-y: 50%;
+  background-color: #ffffff;
+  background-image: url("./dist/select-icon.svg");
+  background-repeat: no-repeat;
+  background-position-x: 91%;
+  background-position-y: 50%;
 }
 
 .lastname-label,
 .select {
-	padding-block-end: 13px;
-	font-size: 18px;
-	line-height: 21px;
+  padding-block-end: 13px;
+  font-size: 18px;
+  line-height: 21px;
 }
 
 .filter-input,
 .lastname-label {
-	font-size: 18px;
-    line-height: 21px;
-    color: #094067;
+  font-size: 18px;
+  line-height: 21px;
+  color: #094067;
 }
 
 input {
-	border: none;
-	border-radius: 5px;
-	padding-block-start: 15px;
-    padding-block-end: 14px;
-    padding-inline-start: 20px;
-	padding-inline-end: 26px;
+  border: none;
+  border-radius: 5px;
+  padding-block-start: 15px;
+  padding-block-end: 14px;
+  padding-inline-start: 20px;
+  padding-inline-end: 26px;
 }
 
-
 ul {
-	padding-inline-start: 0;
+  padding-inline-start: 0;
 }
 
 .person-name {
-	list-style: none;
-	display: flex;
-	flex-direction: row;
-	justify-content: start;
-	flex-wrap: wrap;
-	margin-block-end: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin-block-end: 0;
 }
 
 .cross-btn {
-	background-color: #ffffff;
-	font-size: 29px;
-	padding-inline-end: 0;
-	padding-inline-start: 0;
-	position: absolute;
-    top: 6%;
-    right: 6.5%;
-	border: none;
+  background-color: #ffffff;
+  font-size: 29px;
+  padding-inline-end: 0;
+  padding-inline-start: 0;
+  position: absolute;
+  top: 6%;
+  right: 6.5%;
+  border: none;
 }
 
 .person-name li {
-	padding-inline-end: 5px;
-	font-size: 36px;
-	line-height: 43px;
-	color: #000000;
-
+  padding-inline-end: 5px;
+  font-size: 36px;
+  line-height: 43px;
+  color: #000000;
 }
 
 .birthday-lists {
-	background-color: #ffffff;
-	margin-block-end: 31px;
-	border-radius: 5px;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-	align-items: center;
-	padding-block-end: 0;
-	padding-inline-end: 25px;
-	padding-inline-start: 30px;
-    padding-block-start: 29px;
+  background-color: #ffffff;
+  margin-block-end: 31px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: center;
+  padding-block-end: 0;
+  padding-inline-end: 25px;
+  padding-inline-start: 30px;
+  padding-block-start: 29px;
 }
 
 .birthday-lists img {
-	max-width: 92px;
-    height: 94px;
-	padding-block-start: 1px;
+  max-width: 92px;
+  height: 94px;
+  padding-block-start: 1px;
 }
 
 .name-birthday {
-	margin-block-end: 25px;
+  margin-block-end: 25px;
 }
 
 .name-birthday div {
-	margin-block-start: -9px;
+  margin-block-start: -9px;
 }
 
-.birthday, 
+.birthday,
 .leftDay {
-	font-size: 24px;
-    line-height: 28px;
-    color: #5F6C7B;
-	margin-block-start: 0;
-    margin-block-end: 0;
-	padding-block-start: 20px;
+  font-size: 24px;
+  line-height: 28px;
+  color: #5f6c7b;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-block-start: 20px;
 }
 
 .add-buttton {
-	font-size: 18px;
-    line-height: 21px;
-    background-color: rgb(243, 63, 93);
-    color: white;
-    border-radius: 5px;
-    padding-block-start: 15px;
-    padding-block-end: 14px;
-	padding-inline-end: 23px;
-    padding-inline-start: 22px;
-	margin-block-end: 24px;
-    margin-block-start: 38px;
-    margin-inline-end: 0;
-	margin-inline-start: 16px;
-    border: none;
+  font-size: 18px;
+  line-height: 21px;
+  background-color: rgb(243, 63, 93);
+  color: white;
+  border-radius: 5px;
+  padding-block-start: 15px;
+  padding-block-end: 14px;
+  padding-inline-end: 14px;
+  padding-inline-start: 14px;
+  margin-block-end: 24px;
+  margin-block-start: 38px;
+  margin-inline-end: 0;
+  margin-inline-start: 16px;
+  border: none;
 }
 
 li {
-	list-style: none;
+  list-style: none;
 }
 
 .picture {
-	border-radius: 5px;
-	margin-block-start: -6px;
+  border-radius: 5px;
+  margin-block-start: -6px;
 }
 
 b {
-	color: #EF4565;
+  color: #ef4565;
 }
 
 .edit {
-	border: none;
-	background-color: #ffffff;
+  border: none;
+  background-color: #ffffff;
 }
 
 .icons-edit {
-	color: #5F6C7B;
-	font-size: 32px;
+  color: #5f6c7b;
+  font-size: 32px;
 }
 
 .icons-delete {
-	color: #EF4565;
-	font-size: 32px;
+  color: #ef4565;
+  font-size: 32px;
 }
 
 .icons-wrapper {
-	display: flex;
-    flex-direction: row;
-    align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 }
 
 img {
-	width: 100px;
-	border-radius: 50%;
+  width: 100px;
+  border-radius: 50%;
 }
 
 .popup {
-	background: rgba(255, 255, 255, 0.8);
-	position: fixed;
-	height: 100vh;
-	width: 100vw;
-	transition: all 0.25s;
-	top: 0;
-	display: grid;
-	justify-content: stretch;
-	align-items: center;
-	pointer-events: none;
-	--opacity: 0;
-	opacity: var(--opacity);
-	padding: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.25s;
+  top: 0;
+  display: grid;
+  justify-content: stretch;
+  align-items: center;
+  pointer-events: none;
+  --opacity: 0;
+  opacity: var(--opacity);
+  padding: 1rem;
 }
 
-
 .popup fieldset {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background: var(--grey);
-    padding-block-start: 83px;
-    padding-block-end: 86px;
-	box-shadow: var(--box-shadow);
-	transition: all 0.2s;
-	--scale: 0.3;
-	transform: scale(var(--scale));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--grey);
+  padding-block-start: 83px;
+  padding-block-end: 86px;
+  box-shadow: var(--box-shadow);
+  transition: all 0.2s;
+  --scale: 0.3;
+  transform: scale(var(--scale));
 }
 
 .delete-confirm {
-	text-align: center;
-	margin-inline-end: 37px;
+  text-align: center;
+  margin-inline-end: 37px;
 }
 
 .delete-confirm div {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .delete-confirm div button {
-	margin-inline-end: 32px;
+  margin-inline-end: 32px;
 }
 
-
-
 .new-birthday .flex-row {
-	display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-inline-start: -181px;
-	padding-block-start: 49px;	
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-inline-start: -181px;
 }
 
 .new-birthday .submit-btn {
-	font-size: 16px;
-    line-height: 21px;
-    background-color: rgb(243, 63, 93);
-    color: white;
-    padding-inline-start: 32px;
-    padding-inline-end: 26px;
-    padding-block-end: 15px;
-    padding-block-start: 14px;
-    border: none;
-    border-radius: 5px;
+  font-size: 16px;
+  line-height: 21px;
+  background-color: rgb(243, 63, 93);
+  color: white;
+  padding-inline-start: 32px;
+  padding-inline-end: 26px;
+  padding-block-end: 15px;
+  padding-block-start: 14px;
+  border: none;
+  border-radius: 5px;
 }
 
 .new-birthday .flex-row .close-btn {
-	font-size: 16px;
-    line-height: 21px;
-	background-color: #ffffff;
-    border: 2px solid #5F6C7B;
-    color: #5F6C7B;
-	padding-inline-start: 27px;
-    padding-inline-end: 24px;
-    padding-block-end: 15px;
-    padding-block-start: 14px;
-    border-radius: 5px;
+  font-size: 16px;
+  line-height: 21px;
+  background-color: #ffffff;
+  border: 2px solid #5f6c7b;
+  color: #5f6c7b;
+  padding-inline-start: 27px;
+  padding-inline-end: 24px;
+  padding-block-end: 15px;
+  padding-block-start: 14px;
+  border-radius: 5px;
 }
 
-
 .popup.open {
-	--opacity: 1;
-	pointer-events: all;
-	overflow-x: auto;
+  --opacity: 1;
+  pointer-events: all;
+  overflow-x: auto;
 }
 
 .popup.open fieldset,
 .delete-confirm {
-	--scale: 1;
-    background-color: #ffffff;
-	border: 3px solid var(--pink);
-	position: relative;
+  --scale: 1;
+  background-color: #ffffff;
+  border: 3px solid var(--pink);
+  position: relative;
 }
 
 fieldset h2 {
-	margin-inline-start: -50px;
+  margin-inline-start: -50px;
 }
 
 .new-birthday .add-title {
-	margin-inline-start: -105px;
+  margin-inline-start: -105px;
 }
 
 #birthdayId,
 #addBirthday {
-	padding-inline-end: 68px;
+  padding-inline-end: 90px;
 }
 
 .delete-confirm {
-	padding: 2rem;
-	border-radius: 5px;
+  padding: 2rem;
+  border-radius: 5px;
 }
 
 td button.edit,
 .delete {
-    border: none;
-    background-color: transparent;
+  border: none;
+  background-color: transparent;
 }
 
-.delete, 
+.delete,
 .edit img {
-    max-width: 50px;
+  max-width: 50px;
 }
 
 .form-group {
-	display: flex;
-	flex-direction: column;
-	margin-inline-start: -48px;
+  display: flex;
+  flex-direction: column;
+  margin-inline-start: -48px;
 }
 
 .label {
-	padding-block-end: 8px;
-	padding-block-start: 16px;
+  padding-block-end: 8px;
+  padding-block-start: 16px;
 }
 
 .form-control {
-	background-color: #D8EEFE;
+  background-color: #d8eefe;
 }
 
 .flex-row {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .flex-row button {
-	margin-inline-start: 20px;
-	margin-block-start: 32px;
+  margin-inline-start: 20px;
+  margin-block-start: 32px;
 }
 
 .submitbtn,
 .delete-button {
-	font-size: 16px;
-    line-height: 21px;
-    background-color: rgb(243, 63, 93);
-    color: white;
-    padding-block-start: 15px;
-    padding-block-end: 14px;
-	padding-inline-start: 32px;
-    padding-inline-end: 20px;
-    border: none;
-	border-radius: 5px;	
+  font-size: 16px;
+  line-height: 21px;
+  background-color: rgb(243, 63, 93);
+  color: white;
+  padding-block-start: 15px;
+  padding-block-end: 14px;
+  padding-inline-start: 32px;
+  padding-inline-end: 20px;
+  border: none;
+  border-radius: 5px;
 }
 
 .close-btn {
-	font-size: 16px;
-    line-height: 21px;
-	padding-block-start: 14px;
-    padding-block-end: 15px;
-    padding-inline-end: 50px;
-    padding-inline-start: 48px;
-    background-color: #ffffff;
-    border: 2px solid #5F6C7B;
-    color: #5F6C7B;
-    box-sizing: border-box;
-    border-radius: 5px;
+  font-size: 16px;
+  line-height: 21px;
+  padding-block-start: 14px;
+  padding-block-end: 15px;
+  padding-inline-end: 50px;
+  padding-inline-start: 48px;
+  background-color: #ffffff;
+  border: 2px solid #5f6c7b;
+  color: #5f6c7b;
+  box-sizing: border-box;
+  border-radius: 5px;
 }
 
 .delete-button {
-	padding: 16px;
+  padding: 16px;
 }
 
 .cancel-button {
-	padding: 16px;
-	background-color: #ffffff;
-    border: 2px solid #5F6C7B;
-    border-radius: 5px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 2px solid #5f6c7b;
+  border-radius: 5px;
 }
 
+@media (min-width: 700px) {
+  .birthday-lists {
+    padding-block-start: 1px;
+    padding-inline-start: 43px;
+  }
 
-@media(min-width: 700px) {
-	.birthday-lists {
-		padding-block-start: 1px;
-		padding-inline-start: 43px;
-	}
+  .name-birthday {
+    margin-inline-start: -103px;
+  }
 
-	.name-birthday {
-		margin-inline-start: -103px;
-	}
+  .buttons-wrapper {
+    text-align: end;
+  }
 
-	.buttons-wrapper {
-		text-align: end;
-	}
-	
-	.icons-wrapper {
-		padding-inline-start: 66%;
-		padding-block-start: 20px;
-	}
+  .icons-wrapper {
+    padding-inline-start: 66%;
+    padding-block-start: 20px;
+  }
 
-	.new-birthday .flex-row {
-		flex-direction: row;
-		margin-inline-start: -60px;
-	}
+  .new-birthday .flex-row {
+    flex-direction: row;
+    margin-inline-start: -100px;
+  }
 
-	
-	.popup fieldset, 
-	.delete-confirm {
-		margin-inline-start: 15rem;
-		margin-inline-end: 15rem;
-	} 
+  .popup fieldset,
+  .delete-confirm {
+    margin-inline-start: 15rem;
+    margin-inline-end: 15rem;
+  }
 
-	.popup.open fieldset h2 {
-		font-size: 34px;
-	}
-	
-	.edit-people-birthday .edit-title {
-		margin-inline-start: 39px;
-	} 
-	
-	.new-birthday .add-title {
-		margin-inline-start: -40px;
-	}
-	.flex-row {
-		margin-inline-start: 46px;
-	}	
+  .popup.open fieldset h2 {
+    font-size: 34px;
+  }
+
+  .edit-people-birthday .edit-title {
+    margin-inline-start: -27px;
+  }
+
+  .new-birthday .add-title {
+    margin-inline-start: -68px;
+  }
+  .flex-row {
+    margin-inline-start: 18px;
+  }
 }
 
 @media (max-width: 900px) {
-	.popup fieldset, .delete-confirm {
-		margin-inline-start: 1rem;
-		margin-inline-end: 3rem;
-		padding-inline-start: 63px;
-	}
+  /* .search-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	flex-wrap: wrap;
+  } */
+  .popup fieldset,
+  .delete-confirm {
+    margin-inline-start: 1rem;
+    margin-inline-end: 3rem;
+    padding-inline-start: 63px;
+  }
 
-	.flex-row {
-		margin-inline-start: -50px;
-	}
+  .flex-row {
+    margin-inline-start: -50px;
+  }
 
-	.edit-people-birthday .flex-row {
-		margin-inline-start: -27px;
-		margin-block-start: 49px;
-	}
+  .edit-people-birthday .flex-row {
+    margin-inline-start: -27px;
+    margin-block-start: 49px;
+  }
 }

@@ -111,7 +111,9 @@ async function fetchBirthday() {
         }</li>
                 </ul>
                 <div>
-                  <span class="birthday">Turns <b>${year}</b> on ${month} ${birthDay}<sup>${daySuffix(birthDay)}</sup> 
+                  <span class="birthday">Turns <b>${year}</b> on ${month} ${birthDay}<sup>${daySuffix(
+          birthDay
+        )}</sup> 
                   </span>
                 </div>
               </div>
@@ -406,12 +408,12 @@ async function fetchBirthday() {
           document.body.style.overflow = "auto";
         }
 
-        if(cancelDelete) {
+        if (cancelDelete) {
           destroyPopup(openDiv);
           document.body.style.overflow = "auto";
         }
-        
-        if(crossDelete) {
+
+        if (crossDelete) {
           destroyPopup(openDiv);
           document.body.style.overflow = "auto";
         }
@@ -440,34 +442,6 @@ async function fetchBirthday() {
   const updateLocalStorage = () => {
     localStorage.setItem("data", JSON.stringify(data));
   };
-
-  // Filter input
-  // const searchInput = (e) => {
-  //   const filterInput = input.value;
-  //   const filterBirthday = data.filter(
-  //     (data) =>
-  //       data.lastName.toLowerCase().includes(filterInput.toLowerCase()) ||
-  //       data.firstName.toLowerCase().includes(filterInput.toLowerCase())
-  //   );
-  //   const filterFromHtml = populateBirthday(filterBirthday);
-  //   birthdayData.innerHTML = filterFromHtml;
-  //   if (filterBirthday.length < 0) {
-  //     console.log("Nobody matches that filter options.");
-  //     birthdayData = `<p><i>Nobody matches that filter options.</p>`;
-  //   }
-  // };
-
-  // select.addEventListener("change", function (e) {
-  //   let filteredArr = data.filter((item) => {
-  //     let date = new Date(item.birthday);
-  //     let monthName = date.toLocaleString("default", { month: "long" });
-
-  //     return monthName == e.target.value;
-  //   });
-
-  //   let month = populateBirthday(filteredArr);
-  //   birthdayData.innerHTML = month;
-  // });
 
   function filters() {
     const filteredByMonth = select.value.toLowerCase().trim();

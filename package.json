@@ -4,7 +4,8 @@
   "description": "- Fecth bootstrap through a link in the html.\r - Grab few elements from html.\r - Fetch the data from the `people.json`.\r - Store the data in the `local storage`.\r - Populate these data using html. Inside that population, I format the birthday date. After, I call that function in another new function.\r - Then, I generate the edit(open modal). So, I create editPopup function, editAddPopup fuction and add event listener for the input to be submitted.\r - When they are finished, I create the delete function with its confirm popup, the add event listener too.\r - Then, I put the some events listers at the end.\r - I wrap all the function inside a big `async`.",
   "main": "script.js",
   "dependencies": {
-    "bootstrap": "^4.5.2"
+    "bootstrap": "^4.5.2",
+    "parcel-bundler": "^1.12.5"
   },
   "devDependencies": {},
   "scripts": {
