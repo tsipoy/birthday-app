@@ -63,7 +63,7 @@ fieldset {
   padding-block-start: 15px;
   padding-block-end: 14px;
   padding-inline-end: 123px;
-  padding-inline-start: 23px;
+  padding-inline-start: 36px;
   border: none;
 }
 
@@ -420,6 +420,10 @@ td button.edit,
 
   .name-birthday {
     margin-inline-start: -103px;
+  }
+
+  .select-by-month {
+    padding-inline-start: 23px;
   }
 
   .buttons-wrapper {

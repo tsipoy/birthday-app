@@ -12,10 +12,12 @@
 - Every action in this app are recorded in `local storage`.
 
 ## How to use
+
 - To clone this applications, you need to go to [GitHub](https://github.com/tsipoy/birthday-app).
 - To run this application `npm start`.
 - You can have a look at the [design](https://www.figma.com/file/bb1Mie5R3mUhR77PtGG8bJ/Birthday-App?node-id=0%3A1).
 
 ## Contact
+
 - [GitHub](https://github.com/tsipoy/birthday-app)
-- [Website](https://birthday-app-one.vercel.app/)
+- [Website](https://birthday-app-natacha.netlify.app/)
