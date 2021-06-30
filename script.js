@@ -96,29 +96,38 @@ async function fetchBirthday() {
         );
         let diff = Math.ceil((birth.getTime() - today.getTime()) / oneDay);
 
+        if (diff == "0") {
+          let daysLeftElement = document.getElementsByClassName("leftDay");
+          daysLeftElement.innerHTML = "Today is your birthday";
+        } else {
+          console.log(`In ${diff} days`);
+        }
+
         return `
             <div data-id="${person.id}" class="birthday-lists">
-              <img src="${person.picture}" alt="${
-          person.firstName
-        }" class="picture">
+              <img 
+                src="${person.picture}" 
+                alt="${person.firstName}" 
+                class="picture"
+              >
               <div class="name-birthday">
                 <ul class="person-name">
-                  <li class="lastname" data-value="${person.lastName}">${
-          person.lastName
-        } 
-                  <li class="firstname" data-value="${person.firstName}">${
-          person.firstName
-        }</li>
+                  <li class="lastname" data-value="${person.lastName}">
+                    ${person.lastName} 
+                  </li>
+                  <li class="firstname" data-value="${person.firstName}">
+                    ${person.firstName}
+                  </li>
                 </ul>
                 <div>
-                  <span class="birthday">Turns <b>${year}</b> on ${month} ${birthDay}<sup>${daySuffix(
-          birthDay
-        )}</sup> 
+                  <span class="birthday">Turns 
+                    <b>${year}</b> on ${month} ${birthDay}
+                    <sup>${daySuffix(birthDay)}</sup> 
                   </span>
                 </div>
               </div>
               <nav class="buttons-wrapper">
-                <p class="leftDay">In ${diff} days<br></p>
+                <p class="leftDay">In ${diff} days<br></p> 
                 <ul class="icons-wrapper">
                   <li class="edit-btn">
                     <button class="edit" value="${person.id}">
